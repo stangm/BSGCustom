@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BSG Expansion Primer</title>
+<meta name="description" content="A plain-language guide to what Pegasus, Exodus and Daybreak add to Battlestar Galactica: The Board Game.">
+<style>
+  :root {
+    --bg: #f5f3ee;
+    --panel: #ffffff;
+    --panel-2: #efece4;
+    --text: #1b2333;
+    --muted: #556075;
+    --line: #d9d4c7;
+    --accent: #a9560a;
+    --accent-soft: #f6e3cd;
+    --human: #1f6f8b;
+    --cylon: #b3282d;
+    --ok: #2b7a3d;
+    --ok-soft: #dcefe0;
+    --out-soft: #e6e3dc;
+    --tbd-soft: #fbe9b8;
+    --tbd-text: #6b4a00;
+    --shadow: 0 1px 2px rgba(20, 25, 40, .06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0b1220;
+      --panel: #131c30;
+      --panel-2: #0f1728;
+      --text: #e8edf7;
+      --muted: #9aa7bf;
+      --line: #25324d;
+      --accent: #f2a93b;
+      --accent-soft: #33260f;
+      --human: #6cc4e0;
+      --cylon: #ff7a7f;
+      --ok: #7fd18f;
+      --ok-soft: #14301c;
+      --out-soft: #1c2740;
+      --tbd-soft: #3a2f0c;
+      --tbd-text: #f5d37a;
+      --shadow: none;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0b1220;
+    --panel: #131c30;
+    --panel-2: #0f1728;
+    --text: #e8edf7;
+    --muted: #9aa7bf;
+    --line: #25324d;
+    --accent: #f2a93b;
+    --accent-soft: #33260f;
+    --human: #6cc4e0;
+    --cylon: #ff7a7f;
+    --ok: #7fd18f;
+    --ok-soft: #14301c;
+    --out-soft: #1c2740;
+    --tbd-soft: #3a2f0c;
+    --tbd-text: #f5d37a;
+    --shadow: none;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-text-size-adjust: 100%;
+  }
+  a { color: var(--accent); }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 16px; }
+
+  header.hero {
+    padding: 56px 0 32px;
+    border-bottom: 1px solid var(--line);
+  }
+  .eyebrow {
+    font-size: 13px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin: 0 0 10px;
+  }
+  h1 {
+    font-size: clamp(30px, 6vw, 48px);
+    line-height: 1.1;
+    margin: 0 0 14px;
+    letter-spacing: -.01em;
+  }
+  .lede { font-size: 19px; color: var(--muted); max-width: 640px; margin: 0; }
+
+  nav.jump {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+  }
+  nav.jump .wrap {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    scrollbar-width: thin;
+  }
+  nav.jump a {
+    flex: 0 0 auto;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 15px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--panel);
+    white-space: nowrap;
+  }
+  nav.jump a:hover, nav.jump a:focus-visible { border-color: var(--accent); color: var(--accent); outline: none; }
+
+  section { padding: 44px 0 8px; scroll-margin-top: 52px; }
+  h2 { font-size: clamp(24px, 4.5vw, 32px); line-height: 1.2; margin: 0 0 8px; letter-spacing: -.01em; }
+  h3 { font-size: 20px; margin: 30px 0 6px; }
+  h4 { font-size: 16px; margin: 0 0 4px; }
+  p { margin: 0 0 14px; }
+  .sub { color: var(--muted); margin-bottom: 22px; }
+
+  .grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); margin: 16px 0 8px; }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: var(--shadow);
+  }
+  .card p:last-child { margin-bottom: 0; }
+  .card .season { font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; font-weight: 700; }
+  .card h3 { margin-top: 4px; }
+
+  ol.top, ul.plain { margin: 0; padding-left: 22px; }
+  ol.top li, ul.plain li { margin-bottom: 10px; }
+
+  .piece {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--accent);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin: 12px 0;
+    box-shadow: var(--shadow);
+  }
+  .piece.cylon { border-left-color: var(--cylon); }
+  .piece.human { border-left-color: var(--human); }
+  .piece.out { border-left-color: var(--line); opacity: .82; }
+  .piece h4 { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 18px; margin-bottom: 6px; }
+  .piece p { margin-bottom: 8px; }
+  .piece p:last-child { margin-bottom: 0; }
+
+  .why {
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-size: 15.5px;
+    margin-top: 8px;
+  }
+  .why b { color: var(--accent); }
+
+  .tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    padding: 2px 9px;
+    border-radius: 999px;
+    line-height: 1.5;
+    white-space: nowrap;
+  }
+  .tag-in { background: var(--ok-soft); color: var(--ok); }
+  .tag-out { background: var(--out-soft); color: var(--muted); }
+  .tag-tbd { background: var(--tbd-soft); color: var(--tbd-text); }
+
+  table.setup { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  table.setup th, table.setup td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  table.setup tr:last-child td { border-bottom: 0; }
+  table.setup th { width: 34%; font-weight: 600; }
+  table.setup td small { display: block; color: var(--muted); margin-top: 2px; font-size: 14.5px; }
+
+  dl.glossary { margin: 16px 0 0; }
+  dl.glossary dt { font-weight: 700; margin-top: 14px; }
+  dl.glossary dd { margin: 2px 0 0; color: var(--muted); }
+
+  .links li { margin-bottom: 8px; }
+
+  footer { margin-top: 56px; padding: 28px 0 60px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14.5px; }
+
+  @media (max-width: 560px) {
+    body { font-size: 16.5px; }
+    header.hero { padding-top: 36px; }
+    table.setup th, table.setup td { display: block; width: 100%; }
+    table.setup th { border-bottom: 0; padding-bottom: 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Game night primer</p>
+    <h1>Battlestar Galactica, with everything on the table</h1>
+    <p class="lede">We are playing with Pegasus, Exodus and Daybreak together. This page explains what the new pieces are and how they change the feel of the game. It is not a rulebook, so skim it before we start and ask questions at the table.</p>
+  </div>
+</header>
+
+<nav class="jump" aria-label="Jump to a section">
+  <div class="wrap">
+    <a href="#overview">Overview</a>
+    <a href="#table">Our table</a>
+    <a href="#teams">Who's who</a>
+    <a href="#pegasus">Pegasus</a>
+    <a href="#exodus">Exodus</a>
+    <a href="#daybreak">Daybreak</a>
+    <a href="#earth">The road to Earth</a>
+    <a href="#glossary">Glossary</a>
+    <a href="#links">Rulebooks</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<section id="overview">
+  <h2>The short version</h2>
+  <p class="sub">Each expansion adds cards and characters, plus a few bigger ideas. The three are designed around the show's seasons.</p>
+
+  <div class="grid">
+    <div class="card">
+      <div class="season">Season 2</div>
+      <h3>Pegasus</h3>
+      <p>A second battlestar to fight from, an airlock for executing suspects, and Cylon Leaders: Cylons who are known from the start.</p>
+    </div>
+    <div class="card">
+      <div class="season">Season 3</div>
+      <h3>Exodus</h3>
+      <p>A Cylon fleet that keeps chasing you after every jump, a new CAG title for the pilots, and hidden Final Five cards.</p>
+    </div>
+    <div class="card">
+      <div class="season">Season 4</div>
+      <h3>Daybreak</h3>
+      <p>Mutiny cards, Miracle tokens, new ships, and the mission-based search for Earth. It also replaces a few older pieces.</p>
+    </div>
+  </div>
+
+  <h3>If you read nothing else</h3>
+  <ol class="top">
+    <li><b>One of us is a Cylon Leader.</b> Everyone knows who from turn one, but nobody knows which side that player will end up helping.</li>
+    <li><b>Winning means finding Earth.</b> The fleet needs to reach 10 distance, then jump once more. The <i>Demetrius</i> and its missions can supply some of that distance.</li>
+    <li><b>The Cylons never go away.</b> Ships you jump away from wait on their own board and come back. Civilian ships stay on the board between jumps too.</li>
+    <li><b>The Sympathizer card is gone.</b> The Mutineer takes its place, and it works very differently: a public troublemaker who is probably human.</li>
+    <li><b>You can't count the Cylons any more.</b> One Loyalty card is never dealt, so there may be two hidden Cylons or only one.</li>
+    <li><b>“Once per game” is now a Miracle token.</b> Your special ability is not a one-shot any more. It is a resource that can come back.</li>
+    <li><b>Treachery cards are in every skill check.</b> Two of them are shuffled into the Destiny deck.</li>
+    <li><b>Look for the Skill Check Ability icon.</b> Cards with it do something when they are revealed in a check, whoever played them.</li>
+    <li><b>Mutiny cards are tempting.</b> Drawing a second one sends you straight to the Brig.</li>
+    <li><b>There are three titles now.</b> President, Admiral and the new CAG, who looks after the pilots and civilian ships.</li>
+  </ol>
+</section>
+
+<section id="table">
+  <h2>How we are setting up</h2>
+  <p class="sub">Tags show what is in play at our table.</p>
+
+  <table class="setup">
+    <tr>
+      <th>Expansions</th>
+      <td>Pegasus, Exodus and Daybreak, all together<small>Seven players. Everyone has played the base game before. Expect four to five hours.</small></td>
+    </tr>
+    <tr>
+      <th>Ending</th>
+      <td>Earth (the Search for Home)<small>The Kobol, New Caprica and Ionian Nebula endings stay in the box.</small></td>
+    </tr>
+    <tr>
+      <th>Cylon Leader</th>
+      <td><span class="tag tag-in">In</span><small>Daybreak requires exactly one in a seven-player game.</small></td>
+    </tr>
+    <tr>
+      <th>Cylon Fleet board and CAG</th>
+      <td><span class="tag tag-in">In</span><small>The Exodus space-combat module. The random “Cylon attack” Crisis cards come out of the deck.</small></td>
+    </tr>
+    <tr>
+      <th>Final Five cards</th>
+      <td><span class="tag tag-in">In</span><small>Exodus Loyalty cards that make looking at someone's loyalty risky.</small></td>
+    </tr>
+    <tr>
+      <th>Mutiny cards</th>
+      <td><span class="tag tag-in">In</span><small>With the official rule: a second card sends you to the Brig.</small></td>
+    </tr>
+    <tr>
+      <th>Mutineer</th>
+      <td><span class="tag tag-in">In</span><small>Replaces the Sympathizer. This is the official setup for seven players.</small></td>
+    </tr>
+    <tr>
+      <th>Personal Goals</th>
+      <td><span class="tag tag-out">Out</span><small>The Exodus personal-goal Loyalty cards are not used.</small></td>
+    </tr>
+    <tr>
+      <th>Sympathizer</th>
+      <td><span class="tag tag-out">Out</span><small>Removed whenever Daybreak is used. The Mutineer takes its place.</small></td>
+    </tr>
+    <tr>
+      <th>Allies</th>
+      <td><span class="tag tag-tbd">Undecided</span><small>A fan variant could bring the Exodus Ally cards into an Earth game. Probably not this time, since there is already a lot to learn.</small></td>
+    </tr>
+  </table>
+</section>
+
+<section id="teams">
+  <h2>Who's who at a seven-player table</h2>
+  <p class="sub">The teams work a little differently from the base game.</p>
+
+  <div class="piece cylon">
+    <h4>One known Cylon, and one or two hidden ones</h4>
+    <p>One player picks a Cylon Leader during character selection, so everyone knows that player is a Cylon. The other six get Loyalty cards as usual. Two “You Are a Cylon” cards are in a deck of 14. Six cards are dealt at the start and six more at the Sleeper Agent phase, and the Mutineer draws one extra.</p>
+    <p>That leaves one card that is never dealt. Most games have two hidden Cylons. About one game in seven, a Cylon card sits out and there is only one.</p>
+    <div class="why"><b>Why it matters:</b> in the base game you always knew how many Cylons to look for. Now, after you catch one, you cannot know whether another is still out there.</div>
+  </div>
+
+  <div class="piece human">
+    <h4>One Mutineer</h4>
+    <p>One of the six will turn up the Mutineer card, at the start or at the Sleeper Agent phase, and must show it to everyone. They are on the human side unless their other Loyalty card says otherwise. See the Daybreak section for what the role does.</p>
+  </div>
+
+  <div class="piece">
+    <h4>The Sleeper Agent phase</h4>
+    <p>It still happens once the fleet has traveled 4 distance. Everyone except the Cylon Leader gets one more Loyalty card, so a loyal human can turn out to be a Cylon halfway through. The Leader gets two more Motive cards instead.</p>
+  </div>
+
+  <div class="piece">
+    <h4>Three titles</h4>
+    <p>The President and Admiral work as before. The new CAG title goes to the best pilot in line (Apollo, then Starbuck, and so on). An Admiral or CAG who is sent to the Brig loses the title. The President keeps hers.</p>
+  </div>
+</section>
+
+<section id="pegasus">
+  <h2>Pegasus</h2>
+  <p class="sub">Season 2: a second battlestar arrives, and it comes with an admiral who does not do mercy.</p>
+
+  <div class="piece human">
+    <h4>The Battlestar Pegasus board <span class="tag tag-in">In</span></h4>
+    <p>A second ship with its own locations, sitting next to Galactica. Characters can travel there, and it brings extra firepower. When Galactica would take damage, the current player can choose to damage Pegasus instead. If all four of its locations are damaged at once, Pegasus is destroyed and leaves the game.</p>
+    <p>One of its locations is the Airlock, which executes a character. Executing a Cylon forces them to reveal. Executing a human costs the fleet a morale, and that player has to pick a new character.</p>
+    <div class="why"><b>Why it matters:</b> you now have a hard way to test a suspect, and a hard price to pay if you are wrong.</div>
+  </div>
+
+  <div class="piece human">
+    <h4>New characters <span class="tag tag-in">In</span></h4>
+    <p>Seven of them. Four are humans: Admiral Helena Cain, Anastasia “Dee” Dualla, Louanne “Kat” Katraine and Ellen Tigh. The rest are Cylon Leaders (see Daybreak below).</p>
+  </div>
+
+  <div class="piece cylon">
+    <h4>Cylon Leaders <span class="tag tag-in">In</span></h4>
+    <p>Pegasus introduced the idea: a player who is openly a Cylon from the start, and who can slip into the human fleet by infiltrating. Daybreak refines how they win, and we use the Daybreak rules for everything about them. The full explanation is in the Daybreak section.</p>
+  </div>
+
+  <div class="piece">
+    <h4>Reckless skill checks <span class="tag tag-in">In</span></h4>
+    <p>Some cards can make a skill check <i>Reckless</i>. After the check's card abilities resolve, the top card of the Treachery deck is flipped. Usually nothing happens. If it has a strength of 0, another is flipped, and both cards' abilities take effect.</p>
+    <div class="why"><b>Why it matters:</b> going Reckless can buy you something, but it invites the Cylons' favorite cards into the check.</div>
+  </div>
+
+  <div class="piece">
+    <h4>Other new pieces <span class="tag tag-in">In</span></h4>
+    <p>Two plastic basestars, and new Crisis, Super Crisis, Quorum, Destination and Skill cards.</p>
+  </div>
+
+  <div class="piece out">
+    <h4>New Caprica board and objective <span class="tag tag-out">In the box</span></h4>
+    <p>Pegasus offers its own ending, a Cylon occupation of the human colony. We are going for Earth instead.</p>
+  </div>
+
+  <div class="piece out">
+    <h4>Pegasus pieces that are replaced <span class="tag tag-out">In the box</span></h4>
+    <p>When the expansions are combined, the Pegasus Treachery cards, Agenda cards, Sympathetic Cylon card, Cylon Locations overlay and Infiltration card go away, and the Daybreak versions take their place. The Scar token is not used either.</p>
+  </div>
+</section>
+
+<section id="exodus">
+  <h2>Exodus</h2>
+  <p class="sub">Season 3: the fleet is scattered, tired and haunted by a secret it has not found yet.</p>
+
+  <h3>Always in play</h3>
+
+  <div class="piece human">
+    <h4>New characters <span class="tag tag-in">In</span></h4>
+    <p>Felix Gaeta, Callandra “Cally” Tyrol, Tory Foster and Samuel T. Anders.</p>
+  </div>
+
+  <div class="piece">
+    <h4>Skill Check Abilities <span class="tag tag-in">In</span></h4>
+    <p>Some skill cards and Crisis cards carry a small icon. A card with the icon does something when it is <i>revealed</i> in a skill check, no matter who added it, including the Destiny deck. Duplicates of the same card only trigger once.</p>
+    <p>Some Crisis cards also have a “consequence” result. It fires whenever at least one card with the icon is in the check, whether the check passes or fails.</p>
+    <div class="why"><b>Why it matters:</b> a card that looks helpful can still trigger a consequence. Cylons can use this to make a check that should be safe go wrong.</div>
+  </div>
+
+  <div class="piece">
+    <h4>Nukes <span class="tag tag-in">In</span></h4>
+    <p>The Admiral still starts with two, but a new engineering card can build a third or get a used one back. A nuke is now aimed at an area of space instead of a single basestar. A great roll destroys everything in that area, including our own vipers and civilian ships.</p>
+  </div>
+
+  <div class="piece">
+    <h4>Small table changes <span class="tag tag-in">In</span></h4>
+    <ul class="plain">
+      <li>The President can hold at most 10 Quorum cards.</li>
+      <li>A revealed Cylon draws two skill cards on their turn, and they must be from different decks.</li>
+      <li>When a revealed Cylon plays a Crisis card that has the jump icon, the fleet still moves closer to jumping.</li>
+    </ul>
+  </div>
+
+  <h3>Optional modules</h3>
+  <p>Exodus splits its bigger ideas into three options that can be mixed freely. We are using two of them.</p>
+
+  <div class="piece">
+    <h4>Cylon Fleet <span class="tag tag-in">In</span></h4>
+    <p>A second board for the Cylons. In the base game, a Cylon ship activation with nothing to activate does nothing. With this module, it always does something: new ships appear on the Cylon board and a Pursuit track creeps forward. When it reaches the end, everything on the Cylon board jumps in around Galactica.</p>
+    <p>Other changes:</p>
+    <ul class="plain">
+      <li>The “Cylon attack” Crisis cards are removed. Attacks now build up on the Cylon board instead of arriving at random.</li>
+      <li>Cylon ships do not disappear when the fleet jumps. They wait on the Cylon board, in the area matching where they were.</li>
+      <li>Civilian ships stay where they are when the fleet jumps. A viper can escort one to safety instead of moving or attacking.</li>
+      <li>There is a new CAG title for the officer who directs the pilots. The CAG decides where new civilian ships are placed.</li>
+      <li>Four faster Mark VII vipers join the fleet. They start damaged, so someone has to repair them first.</li>
+      <li>Revealed Cylons get a new location, the Basestar Bridge.</li>
+    </ul>
+    <div class="why"><b>Why it matters:</b> space combat feels like a constant chase instead of random attacks. You can see where the next attack will come from, and pilots and the CAG always have something to do.</div>
+  </div>
+
+  <div class="piece cylon">
+    <h4>Final Five cards <span class="tag tag-in">In</span></h4>
+    <p>These are Loyalty cards that say “You Are Not a Cylon” and count that way when deciding who wins. But your character is secretly one of the Final Five. If another player looks at the card (Baltar's Cylon Detector, for example) or it is revealed by an execution, its text takes effect, and it is usually bad news for whoever went looking.</p>
+    <p>Expect two or three of them to be in play. You may never say you hold one, though you can hint by warning people off your cards, whether or not the warning is true. A Final Five card that is never looked at does nothing at all.</p>
+    <div class="why"><b>Why it matters:</b> checking someone's loyalty is now a gamble. Even honest players may act nervous when someone wants to look at their cards.</div>
+  </div>
+
+  <div class="piece out">
+    <h4>Ionian Nebula: trauma, allies and crossroads <span class="tag tag-out">In the box</span></h4>
+    <p>This option is built around its own ending, so it is not used with the Earth objective. It adds Trauma tokens, Ally cards to encounter on Galactica, and a trial near the end where the crew judges who still belongs. Its alternate basestar damage tokens stay in the box with it.</p>
+  </div>
+
+  <div class="piece out">
+    <h4>Personal Goal cards <span class="tag tag-out">Out</span></h4>
+    <p>Secret goals that work against the fleet. We are leaving these out.</p>
+  </div>
+</section>
+
+<section id="daybreak">
+  <h2>Daybreak</h2>
+  <p class="sub">Season 4: the fleet is falling apart, and it is time to find home. This is the final expansion, and where it conflicts with the other two, its rules win.</p>
+
+  <div class="piece cylon">
+    <h4>Cylon Leaders and Motive cards <span class="tag tag-in">In</span></h4>
+    <p>A Cylon Leader is a known Cylon from the start, but which side they win with is secret. They hold Motive cards, each showing an allegiance (human or Cylon) and a condition. When a condition is being met, they can reveal that card.</p>
+    <p>To win, a Cylon Leader must end the game with no more than one unrevealed Motive card, and at least two revealed cards must match the team that won. They start with two Motive cards and receive two more at the Sleeper Agent phase.</p>
+    <p><b>Infiltrating:</b> from the Human Fleet location, a Cylon Leader can slip into Galactica and act like a human. They move on the human side, draw a Crisis card, and can use skill cards' abilities. They cannot hold a title, and they can put at most two cards in a skill check. Returning to the Resurrection Ship ends it.</p>
+    <div class="why"><b>Why it matters:</b> the Leader is a wildcard, so treat them as an unpredictable player, not an automatic enemy. Helping them meet a human-side Motive can win them over.</div>
+  </div>
+
+  <div class="piece">
+    <h4>Mutiny cards <span class="tag tag-in">In</span></h4>
+    <p>Special abilities that can help the fleet, usually at a cost. Keep them secret, and play one as your action. Most players can hold one. The moment you draw a second, you go to the Brig and keep just one. Revealed Cylons cannot use them.</p>
+    <p>You get them from some Crisis cards and locations, and from choosing to discard certain Treachery cards.</p>
+    <div class="why"><b>Why it matters:</b> the Brig hurts more with seven players, because turns come around slowly. The good news is that the Brig escape is a normal skill check, so the whole table can help get you out.</div>
+  </div>
+
+  <div class="piece human">
+    <h4>The Mutineer <span class="tag tag-in">In</span></h4>
+    <p>A new Loyalty card that replaces the Sympathizer. Whoever gets it must reveal it right away and draw one more Loyalty card. They also draw a Mutiny card and hand over any titles they hold.</p>
+    <p>The Mutineer counts as a human for winning, but that extra card means they could still be a Cylon. They draw a Mutiny card on each of their turns when their Crisis card has the “prepare for jump” icon, which is most turns. They can hold two Mutiny cards instead of one, and go to the Brig on the third.</p>
+    <p>If the Mutineer reveals as a Cylon, they pass the Mutineer card to a human of their choice.</p>
+    <div class="why"><b>Why it matters:</b> this is a public troublemaker whose loyalty is a real question. They will be playing Mutiny cards all game, and the real Cylons can hide behind the suspicion they attract.</div>
+  </div>
+
+  <div class="piece">
+    <h4>Miracle tokens <span class="tag tag-in">In</span></h4>
+    <p>Everyone starts with one. Your character's “once per game” ability is now a Miracle ability, and you spend your token to use it. If something gives you a new token, you can use it again. You can only hold one at a time, and a revealed Cylon loses theirs. The alternate Gaius Baltar is an exception: he can store up to three.</p>
+  </div>
+
+  <div class="piece">
+    <h4>Treachery deck and the Destiny deck <span class="tag tag-in">In</span></h4>
+    <p>Treachery cards are skill cards for sabotage. They count negatively and mostly help the Cylons. Every one of them has a Skill Check Ability. Two Treachery cards are now shuffled into the Destiny deck, so it holds 12 cards.</p>
+    <p>Some Treachery cards make you draw a Mutiny card when you choose to discard them.</p>
+  </div>
+
+  <div class="piece human">
+    <h4>New and alternate characters <span class="tag tag-in">In</span></h4>
+    <p>Twelve character sheets: new humans including Doc Cottle, Romo Lampkin, Hot Dog and Louis Hoshi; alternate versions of Lee Adama, Tom Zarek, Helo and Gaius Baltar; and four Cylon Leaders, including Athena and D'Anna Biers. If one version of a character is taken, nobody else can take the other.</p>
+  </div>
+
+  <div class="piece">
+    <h4>Assault Raptors <span class="tag tag-in">In</span></h4>
+    <p>A new human ship. It counts as a viper for game effects, and it is better at attacking basestars. It cannot be damaged, it is simply destroyed on a 7 or 8. A pilot in an assault raptor can stay out in space when the fleet jumps.</p>
+  </div>
+
+  <div class="piece">
+    <h4>Board changes <span class="tag tag-in">In</span></h4>
+    <ul class="plain">
+      <li>New overlays cover Colonial One and the Cylon locations, so read them before your first turn there.</li>
+      <li>Hazardous locations (the Brig, Sickbay and now the Resurrection Ship) can only be entered when a card or effect sends you there.</li>
+      <li>Centurions are now plastic figures.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="earth">
+  <h2>The road to Earth</h2>
+  <p class="sub">Daybreak's “Search for Home” is our ending. It changes how the game is won.</p>
+
+  <div class="piece human">
+    <h4>The Earth objective <span class="tag tag-in">In</span></h4>
+    <p>This replaces the Kobol objective. The fleet needs to reach 10 distance, and then the next jump wins the game. Distance can come from jumps and from missions.</p>
+  </div>
+
+  <div class="piece human">
+    <h4>The <i>Demetrius</i> and missions <span class="tag tag-in">In</span></h4>
+    <p>The Demetrius is a new ship with its own board. Using its Bridge location reveals a Mission card, and the team attempts its skill check. Passing and failing each have their own result, and some missions add distance immediately when passed. Only one mission can be attempted between jumps.</p>
+    <p>A mission takes the place of that turn's Crisis card. If anyone uses the Bridge during a turn, no Crisis card is drawn at the end of it.</p>
+    <p>Missions do different things. Some add one or two distance. Others clear Cylon ships off the board for good.</p>
+    <div class="why"><b>Why it matters:</b> a mission is a fight the humans choose, instead of a random crisis. But your usual tricks do not work here: abilities and cards that alter skill checks do not apply to missions, so only the cards played count, and a Cylon can sink one as easily as anyone can help.</div>
+  </div>
+
+  <div class="piece">
+    <h4>The Rebel Basestar <span class="tag tag-in">In</span></h4>
+    <p>A mission called “Cylon Civil War” brings this board into the game. Depending on how that check goes, the Rebel Basestar becomes either a human location or a Cylon one. Whichever team it lands with can travel there and use its locations, and the other team cannot.</p>
+  </div>
+</section>
+
+<section id="glossary">
+  <h2>Glossary</h2>
+  <dl class="glossary">
+    <dt>CAG</dt><dd>Commander, Air Group: a third title, for the officer who directs the pilots and places civilian ships.</dd>
+    <dt>Cylon Fleet board</dt><dd>Where Cylon ships gather between attacks. They return to it whenever the fleet jumps.</dd>
+    <dt>Cylon Leader</dt><dd>A player who is a known Cylon from the beginning and wins by Motive cards.</dd>
+    <dt>Demetrius</dt><dd>The ship whose Bridge location starts missions.</dd>
+    <dt>Destiny deck</dt><dd>The cards secretly added to every skill check to muddy the water. It now includes Treachery.</dd>
+    <dt>Final Five</dt><dd>Loyalty cards that count as human but carry a hidden effect if someone looks at them.</dd>
+    <dt>Hazardous location</dt><dd>A striped-border location (Brig, Sickbay, Resurrection Ship) that you can only be sent to.</dd>
+    <dt>Infiltrating</dt><dd>When a Cylon Leader acts as a human inside the fleet.</dd>
+    <dt>Miracle token</dt><dd>What you spend to use your character's “once per game” ability.</dd>
+    <dt>Mission</dt><dd>A skill check the humans choose to attempt from the Demetrius. It replaces that turn's Crisis card.</dd>
+    <dt>Motive card</dt><dd>A Cylon Leader's secret goal card with an allegiance and a reveal condition.</dd>
+    <dt>Mutineer</dt><dd>The player who holds the face-up “You Are the Mutineer” Loyalty card. They collect extra Mutiny cards and may hold two.</dd>
+    <dt>Mutiny card</dt><dd>A hidden action card. Your limit is one, and drawing a second sends you to the Brig.</dd>
+    <dt>Pursuit track</dt><dd>The Cylon Fleet board's countdown to an attack on Galactica.</dd>
+    <dt>Rebel Basestar</dt><dd>A board that may arrive mid-game and belongs to whichever side wins the “Cylon Civil War” mission.</dd>
+    <dt>Skill Check Ability</dt><dd>An icon on some cards. The card's text triggers when it is revealed in a skill check.</dd>
+    <dt>Treachery</dt><dd>A skill type of sabotage cards, used mostly by revealed Cylons. They count as negative strength in checks.</dd>
+  </dl>
+</section>
+
+<section id="links">
+  <h2>Rulebooks and references</h2>
+  <p class="sub">This page is only a primer. For actual rules, use these. The first two are written for our table; the rest are general.</p>
+  <ul class="links plain">
+    <li><a href="rulebook.html">Our house rulebook</a>: every rule for the setup described on this page, in one place.</li>
+    <li><a href="player-aid.pdf">Two-page player aid (PDF)</a>: a turn-by-turn reference to print and keep at your seat. Also available as a <a href="player-aid.docx">Word file</a>.</li>
+    <li><a href="https://jbiatek.github.io/BSGRulebook/rulebook.html">Dynamic BSG rulebook</a>: a fan-made combined rulebook that changes to match the expansions you choose.</li>
+    <li><a href="https://images-cdn.fantasyflightgames.com/ffg_content/Battlestar_Galactica/BSG-Pegasus-rulebook-web.pdf">Pegasus rulebook (PDF)</a></li>
+    <li><a href="https://images-cdn.fantasyflightgames.com/filer_public/06/66/0666fbcc-e40f-423c-b102-0ba2164d2455/bsg-exodus-rules.pdf">Exodus rulebook (PDF)</a></li>
+    <li><a href="https://boardgamegeek.com/boardgame/141648">Daybreak on BoardGameGeek</a>: files and rulebook downloads.</li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>An unofficial fan resource for a home game. Battlestar Galactica: The Board Game is published by Fantasy Flight Games and is based on the series owned by its rights holders. Rule descriptions here are summaries; if this page and a rulebook disagree, the rulebook wins.</p>
+  </div>
+</footer>
+
+</body>
+</html>

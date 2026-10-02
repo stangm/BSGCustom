@@ -1,0 +1,2494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BSG House Rulebook</title>
+<meta name="description" content="Our consolidated house rulebook for seven-player Battlestar Galactica with Pegasus, Exodus and Daybreak.">
+<style>
+  :root {
+    --bg: #f5f3ee;
+    --panel: #ffffff;
+    --panel-2: #efece4;
+    --text: #1b2333;
+    --muted: #556075;
+    --line: #d9d4c7;
+    --accent: #a9560a;
+    --accent-soft: #f6e3cd;
+    --human: #1f6f8b;
+    --cylon: #b3282d;
+    --ok: #2b7a3d;
+    --ok-soft: #dcefe0;
+    --out-soft: #e6e3dc;
+    --tbd-soft: #fbe9b8;
+    --tbd-text: #6b4a00;
+    --shadow: 0 1px 2px rgba(20, 25, 40, .06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0b1220;
+      --panel: #131c30;
+      --panel-2: #0f1728;
+      --text: #e8edf7;
+      --muted: #9aa7bf;
+      --line: #25324d;
+      --accent: #f2a93b;
+      --accent-soft: #33260f;
+      --human: #6cc4e0;
+      --cylon: #ff7a7f;
+      --ok: #7fd18f;
+      --ok-soft: #14301c;
+      --out-soft: #1c2740;
+      --tbd-soft: #3a2f0c;
+      --tbd-text: #f5d37a;
+      --shadow: none;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0b1220;
+    --panel: #131c30;
+    --panel-2: #0f1728;
+    --text: #e8edf7;
+    --muted: #9aa7bf;
+    --line: #25324d;
+    --accent: #f2a93b;
+    --accent-soft: #33260f;
+    --human: #6cc4e0;
+    --cylon: #ff7a7f;
+    --ok: #7fd18f;
+    --ok-soft: #14301c;
+    --out-soft: #1c2740;
+    --tbd-soft: #3a2f0c;
+    --tbd-text: #f5d37a;
+    --shadow: none;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-text-size-adjust: 100%;
+  }
+  a { color: var(--accent); }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 16px; }
+
+  header.hero {
+    padding: 56px 0 32px;
+    border-bottom: 1px solid var(--line);
+  }
+  .eyebrow {
+    font-size: 13px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin: 0 0 10px;
+  }
+  h1 {
+    font-size: clamp(30px, 6vw, 48px);
+    line-height: 1.1;
+    margin: 0 0 14px;
+    letter-spacing: -.01em;
+  }
+  .lede { font-size: 19px; color: var(--muted); max-width: 640px; margin: 0; }
+
+  nav.jump {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+  }
+  nav.jump .wrap {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    scrollbar-width: thin;
+  }
+  nav.jump a {
+    flex: 0 0 auto;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 15px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--panel);
+    white-space: nowrap;
+  }
+  nav.jump a:hover, nav.jump a:focus-visible { border-color: var(--accent); color: var(--accent); outline: none; }
+
+  section { padding: 44px 0 8px; scroll-margin-top: 52px; }
+  h2 { font-size: clamp(24px, 4.5vw, 32px); line-height: 1.2; margin: 0 0 8px; letter-spacing: -.01em; }
+  h3 { font-size: 20px; margin: 30px 0 6px; }
+  h4 { font-size: 16px; margin: 0 0 4px; }
+  p { margin: 0 0 14px; }
+  .sub { color: var(--muted); margin-bottom: 22px; }
+
+  .grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); margin: 16px 0 8px; }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: var(--shadow);
+  }
+  .card p:last-child { margin-bottom: 0; }
+  .card .season { font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; font-weight: 700; }
+  .card h3 { margin-top: 4px; }
+
+  ol.top, ul.plain { margin: 0; padding-left: 22px; }
+  ol.top li, ul.plain li { margin-bottom: 10px; }
+
+  .piece {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--accent);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin: 12px 0;
+    box-shadow: var(--shadow);
+  }
+  .piece.cylon { border-left-color: var(--cylon); }
+  .piece.human { border-left-color: var(--human); }
+  .piece.out { border-left-color: var(--line); opacity: .82; }
+  .piece h4 { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 18px; margin-bottom: 6px; }
+  .piece p { margin-bottom: 8px; }
+  .piece p:last-child { margin-bottom: 0; }
+
+  .why {
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-size: 15.5px;
+    margin-top: 8px;
+  }
+  .why b { color: var(--accent); }
+
+  .tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    padding: 2px 9px;
+    border-radius: 999px;
+    line-height: 1.5;
+    white-space: nowrap;
+  }
+  .tag-in { background: var(--ok-soft); color: var(--ok); }
+  .tag-out { background: var(--out-soft); color: var(--muted); }
+  .tag-tbd { background: var(--tbd-soft); color: var(--tbd-text); }
+
+  table.setup { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  table.setup th, table.setup td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  table.setup tr:last-child td { border-bottom: 0; }
+  table.setup th { width: 34%; font-weight: 600; }
+  table.setup td small { display: block; color: var(--muted); margin-top: 2px; font-size: 14.5px; }
+
+  dl.glossary { margin: 16px 0 0; }
+  dl.glossary dt { font-weight: 700; margin-top: 14px; }
+  dl.glossary dd { margin: 2px 0 0; color: var(--muted); }
+
+  .links li { margin-bottom: 8px; }
+
+  footer { margin-top: 56px; padding: 28px 0 60px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14.5px; }
+
+  @media (max-width: 560px) {
+    body { font-size: 16.5px; }
+    header.hero { padding-top: 36px; }
+    table.setup th, table.setup td { display: block; width: 100%; }
+    table.setup th { border-bottom: 0; padding-bottom: 0; }
+  }
+
+  /* rulebook page */
+  .doc h1 { font-size: clamp(28px, 5vw, 40px); margin-top: 0; }
+  .doc h2 { margin-top: 44px; padding-top: 8px; border-top: 1px solid var(--line); scroll-margin-top: 16px; }
+  .doc h3 { scroll-margin-top: 16px; }
+  .doc ul, .doc ol { padding-left: 22px; margin: 0 0 14px; }
+  .doc li { margin-bottom: 6px; }
+  .doc hr { display: none; }
+  .doc blockquote { margin: 16px 0; padding: 10px 14px; background: var(--accent-soft); border-radius: 8px; }
+  .doc blockquote p:last-child { margin-bottom: 0; }
+  .doc .tablewrap { overflow-x: auto; margin: 12px 0 18px; }
+  .doc table { border-collapse: collapse; background: var(--panel); border: 1px solid var(--line); width: 100%; font-size: 15.5px; }
+  .doc th, .doc td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .doc th { background: var(--panel-2); }
+  .doc code { background: var(--panel-2); padding: 1px 5px; border-radius: 4px; font-size: .92em; }
+  .back { display: inline-block; margin: 20px 0 8px; font-weight: 600; text-decoration: none; }
+  @media print { nav.jump, .back { display: none; } body { background: #fff; } }
+</style>
+</head>
+<body>
+<main class="wrap doc">
+<a class="back" href="index.html">&larr; Back to the primer</a>
+<h1 id="battlestar-galactica-7-player-consolidated-rulebook">Battlestar
+Galactica: 7-Player Consolidated Rulebook</h1>
+<p><strong>House edition · Version 1.2 · October 2026</strong></p>
+<p>The base game plus Pegasus, Exodus and Daybreak, trimmed to the
+modules our group chose. When this book and a card disagree, <strong>the
+card wins</strong>. When this book and an official rulebook disagree,
+check the Decision Log first: some differences are deliberate.
+Everything else follows the official rulebooks, FAQ 2.1, and the fan
+<em>Unofficial Combined Rulebook v2.0</em> (CR2.0), which merges all
+four rulebooks.</p>
+<blockquote>
+<p><strong>The Mutineer is in this edition.</strong> Version 1.2 adds
+the "You Are the Mutineer" Loyalty card, which is the official Daybreak
+setup for 7 players. Its rules are in §15.5. <strong>Appendix A</strong>
+says what to change if the group ever wants to play without it.</p>
+</blockquote>
+<hr />
+<h2 id="contents">Contents</h2>
+<ol type="1">
+<li><a href="#1-what-this-game-uses">What This Game Uses</a></li>
+<li><a href="#2-overview-and-how-to-win">Overview and How to
+Win</a></li>
+<li><a href="#3-components-and-pre-game-sort">Components and Pre-Game
+Sort</a></li>
+<li><a href="#4-setup">Setup</a></li>
+<li><a href="#5-core-concepts-and-secrecy">Core Concepts and
+Secrecy</a></li>
+<li><a href="#6-characters-miracles-and-titles">Characters, Miracles and
+Titles</a></li>
+<li><a href="#7-the-game-turn">The Game Turn</a></li>
+<li><a href="#8-movement-and-locations">Movement and Locations</a></li>
+<li><a href="#9-skill-cards-and-skill-checks">Skill Cards and Skill
+Checks</a></li>
+<li><a href="#10-crises">Crises</a></li>
+<li><a href="#11-combat">Combat</a></li>
+<li><a href="#12-the-cylon-fleet-board">The Cylon Fleet Board</a></li>
+<li><a href="#13-jumping-the-fleet">Jumping the Fleet</a></li>
+<li><a href="#14-the-search-for-home-earth-demetrius-and-missions">The
+Search for Home: Earth, Demetrius and Missions</a></li>
+<li><a
+href="#15-loyalty-the-final-five-and-the-sleeper-agent-phase">Loyalty,
+the Final Five and the Sleeper Agent Phase</a></li>
+<li><a href="#16-revealed-cylons">Revealed Cylons</a></li>
+<li><a href="#17-cylon-leaders">Cylon Leaders</a></li>
+<li><a href="#18-mutiny-cards-and-the-brig">Mutiny Cards and the
+Brig</a></li>
+<li><a href="#19-execution">Execution</a></li>
+<li><a href="#20-ending-the-game">Ending the Game</a></li>
+<li><a href="#21-miscellaneous-rules">Miscellaneous Rules</a></li>
+<li><a href="#22-clarifications-and-errata">Clarifications and
+Errata</a></li>
+</ol>
+<ul>
+<li><a href="#appendix-a-playing-without-the-mutineer">Appendix A:
+Playing Without the Mutineer</a></li>
+<li><a href="#appendix-b-house-rules-in-reserve">Appendix B: House Rules
+in Reserve</a></li>
+<li><a href="#appendix-c-allies-for-all-seasons-undecided">Appendix C:
+Allies for All Seasons (Undecided)</a></li>
+<li><a href="#appendix-d-whats-new-since-the-base-game">Appendix D:
+What's New Since the Base Game</a></li>
+<li><a href="#appendix-e-quick-reference">Appendix E: Quick
+Reference</a></li>
+</ul>
+<hr />
+<h2 id="1-what-this-game-uses">1. What This Game Uses</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>In</th>
+<th>Out</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Base game</strong></td>
+<td>Everything except what's listed as out</td>
+<td>Kobol Objective, base President and Admiral title cards, Cylon
+Attack crises, Sympathizer card, cardboard basestars and centurion
+markers, 2 vipers</td>
+</tr>
+<tr class="even">
+<td><strong>Pegasus</strong></td>
+<td>Pegasus board and damage tokens, Pegasus
+Crisis/Skill/Destination/Quorum cards, new characters, Cylon Leader
+characters, Execution rules</td>
+<td>Pegasus Treachery cards, Pegasus Cylon Locations overlay, Pegasus
+Infiltration card, Agenda cards, Sympathetic Cylon card, New Caprica
+(board, Objective, crises, occupation tokens), Pegasus Admiral card,
+Scar token</td>
+</tr>
+<tr class="odd">
+<td><strong>Exodus</strong></td>
+<td>Cylon Fleet board, pursuit marker, CAG title, alternate (Exodus)
+Admiral title, Viper Mark VIIs, extra raiders, Exodus
+Crisis/Skill/Destination/Quorum cards including "CAG Chooses" crises,
+replacement <em>Investigative Committee</em> cards, new characters,
+<strong>Final Five</strong> Loyalty cards</td>
+<td><strong>Personal Goal</strong> Loyalty cards, Ionian Nebula
+(Objective, Allies, Trauma, Crossroads, alternate basestar damage
+tokens), <em>Mining Asteroid</em> destination</td>
+</tr>
+<tr class="even">
+<td><strong>Daybreak</strong></td>
+<td>Colonial One and Cylon Locations overlays, Mutiny cards, the
+<strong>Mutineer</strong> Loyalty card, miracle tokens, Motive cards,
+Daybreak Treachery cards, Daybreak Infiltration card, Assault Raptors,
+plastic centurions, alternate characters, Daybreak Crisis/Skill cards,
+<strong>Search for Home</strong> (Earth Objective, Demetrius, Rebel
+Basestar, allegiance marker, Mission cards)</td>
+<td>Daybreak Cylon Attack crises</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Objective:</strong> Earth (Search for Home).
+<strong>Players:</strong> 7, and one must be a Cylon Leader.</p>
+<hr />
+<h2 id="2-overview-and-how-to-win">2. Overview and How to Win</h2>
+<p>BSG is a team game with hidden teams. Most players are human and want
+to reach Earth. Some are secretly Cylons trying to destroy humanity. One
+player is a known <strong>Cylon Leader</strong> whose true side depends
+on secret Motive cards. Each player's team comes from their Loyalty
+cards, and it can change when new cards arrive at the Sleeper Agent
+phase.</p>
+<h3 id="21-human-victory">2.1 Human victory</h3>
+<p>The fleet must travel <strong>10 distance</strong>, then <strong>jump
+one more time</strong>. That final jump ends the game in a human win, as
+long as no Cylon victory condition happened first. Distance comes from
+Destination cards and passed distance Missions.</p>
+<h3 id="22-cylon-victory">2.2 Cylon victory</h3>
+<p>All Cylons win if any of these happens:</p>
+<ul>
+<li><strong>A resource runs out:</strong> food, fuel, morale or
+population is at 0 <strong>at the end of any player's turn</strong>. A
+resource can hit 0 and be raised again in the same turn without
+losing.</li>
+<li><strong>Centurion invasion:</strong> a centurion reaches the end of
+the Boarding Party track.</li>
+<li><strong>Galactica destroyed:</strong> 6 or more Galactica locations
+are damaged at the same time.</li>
+<li><strong>No characters left:</strong> a human is executed and there's
+no character left to choose. This is very unlikely with all
+expansions.</li>
+</ul>
+<h3 id="23-cylon-leader-victory">2.3 Cylon Leader victory</h3>
+<p>The Leader wins with whichever side wins, <strong>only if</strong> at
+game end they have (a) no more than <strong>one</strong> unrevealed
+Motive card, and (b) at least <strong>two</strong> revealed Motives
+whose allegiance matches the winning side. With two human and two Cylon
+Motives revealed, they win with either side. See §17.</p>
+<hr />
+<h2 id="3-components-and-pre-game-sort">3. Components and Pre-Game
+Sort</h2>
+<p>Do this before game night. It saves 20+ minutes at the table.</p>
+<p><strong>Put in the box (not used):</strong></p>
+<ul>
+<li>Kobol, New Caprica and Ionian Nebula Objective cards</li>
+<li>New Caprica board, New Caprica Crisis deck, occupation forces
+tokens</li>
+<li>Ally cards and tokens, Trauma tokens, Crossroads cards,
+<strong>alternate basestar damage tokens</strong> (Exodus)</li>
+<li>Pegasus Treachery cards, Pegasus Cylon Locations overlay, Pegasus
+Infiltration card</li>
+<li>Agenda cards (Hostile and Sympathetic)</li>
+<li>Loyalty cards: <em>You Are a Sympathizer</em>, <em>You Are a
+Sympathetic Cylon</em>, all 8 <strong>Personal Goal</strong> cards</li>
+<li>Base President title card; base and Pegasus Admiral title cards (use
+the Exodus Admiral card and the newest President card)</li>
+<li><strong>All Cylon Attack cards</strong> from the Crisis deck (19
+across base, Pegasus and Daybreak) and both from the Super Crisis
+deck</li>
+<li><em>Mining Asteroid</em> Destination card</li>
+<li>2 of the 8 basic vipers</li>
+<li>Cardboard basestar tokens (use plastic), centurion markers (use
+plastic centurions), Scar token</li>
+<li>The original <em>Investigative Committee</em> Politics cards
+replaced by the 7 Exodus replacements</li>
+</ul>
+<p><strong>Shuffle together:</strong> all remaining Crisis cards from
+every box (including "CAG Chooses" crises), all Super Crises, all
+Destinations, all Quorum cards, each Skill type across boxes, and the
+Daybreak Treachery deck.</p>
+<p><strong>Deck counts after sorting (useful for checking):</strong> 14
+Motive cards, 22 Mutiny cards, 8 Mission cards. The Loyalty cards we use
+are 18 <em>You Are Not a Cylon</em>, 5 <em>Final Five</em>, 7 <em>You
+Are a Cylon</em> and 1 <em>You Are the Mutineer</em>.</p>
+<p><strong>Table space:</strong> main board in the centre; Pegasus
+beside it; the Cylon Fleet board on the other side; Demetrius next to
+one of them. Leave room for the Rebel Basestar, which may arrive
+mid-game. The official books disagree on left and right, so use whatever
+layout fits the table.</p>
+<hr />
+<h2 id="4-setup">4. Setup</h2>
+<p>Follow these steps in order.</p>
+<p><strong>1. Objective.</strong> Place the <strong>Earth Objective
+card</strong> face up next to the Destination deck.</p>
+<p><strong>2. Boards.</strong></p>
+<ul>
+<li>Main board in the centre. Set <strong>food 8, fuel 8, morale 10,
+population 12</strong>.</li>
+<li>Place the Daybreak <strong>Colonial One overlay</strong> and
+<strong>Cylon Locations overlay</strong>, with the "Colonial One
+Destroyed" and "Hub Destroyed" sides face down.</li>
+<li>Place the <strong>Pegasus</strong> board, the <strong>Cylon
+Fleet</strong> board (pursuit marker on <em>Start</em>) and the
+<strong>Demetrius</strong> board.</li>
+<li>Set the <strong>Rebel Basestar</strong> board and allegiance marker
+aside until the <em>Cylon Civil War</em> mission calls for them.</li>
+<li>Put the fleet marker on the <em>Start</em> space of the Jump
+Preparation track.</li>
+</ul>
+<p><strong>3. Ships and tokens.</strong></p>
+<ul>
+<li>Reserves: 4 basic vipers, 4 raptors, 1 assault raptor. The starting
+assault raptor can't be placed during setup. Other assault raptors stay
+beside the board until gained.</li>
+<li><strong>4 Viper Mark VIIs in the Damaged Vipers box.</strong></li>
+<li><strong>2 vipers</strong> in the space area below Galactica and
+<strong>2 civilian ships</strong> (drawn at random) behind
+Galactica.</li>
+<li><strong>1 basestar and 3 raiders</strong> in front of
+Galactica.</li>
+<li>Everything else (damage tokens face down, other ships, nukes,
+miracle tokens) goes beside the boards.</li>
+</ul>
+<p><strong>4. Cards.</strong></p>
+<ul>
+<li>Shuffle the Quorum, Crisis, Super Crisis, Mutiny, Destination and
+Mission decks.</li>
+<li>Sort Skill cards into six decks by type: Politics, Leadership,
+Tactics, Piloting, Engineering and Treachery. Shuffle each.</li>
+<li><strong>Destiny deck:</strong> deal 2 cards of each of the six
+types, Treachery included (12 cards), and shuffle.</li>
+</ul>
+<p><strong>5. First player.</strong> Choose one at random and give them
+the current player token.</p>
+<p><strong>6. Choose characters.</strong> Starting with the first player
+and going clockwise:</p>
+<ul>
+<li>Each player picks a character of whichever type (Political Leader,
+Military Leader or Pilot) is <strong>most plentiful among those still
+available</strong>. <strong>Support</strong> characters and the
+<strong>Cylon Leader</strong> may be picked at any time.</li>
+<li><strong>Alternate versions</strong> (Lee Adama, Tom Zarek, Helo,
+Baltar): once one version is taken, the other is unavailable. It
+<strong>still counts</strong> when working out which type is most
+plentiful.</li>
+<li><strong>Exactly one Cylon Leader, and one is required at 7
+players.</strong> If several players want it, the first to pick gets it.
+If nobody has picked a Leader by the last player, that player must take
+one (a house clarification of the official requirement).</li>
+<li>Each player takes their sheet, stand-up token, piloting token if
+any, and <strong>1 miracle token</strong>, then places their token at
+the setup location on the sheet. Apollo may start in an assault raptor
+instead of a viper.</li>
+</ul>
+<p><strong>7. Titles.</strong></p>
+<ul>
+<li><strong>President:</strong> the character highest on the President
+line of succession. They draw <strong>1 Quorum card</strong>.</li>
+<li><strong>Admiral</strong> (Exodus Admiral card): the highest on the
+Admiral line. They take <strong>2 nuke tokens</strong>; the third goes
+beside the board.</li>
+<li><strong>CAG:</strong> the highest on the CAG line.</li>
+<li>A Cylon Leader can never hold a title (see §17).</li>
+</ul>
+<p><strong>8. Loyalty deck.</strong></p>
+<ul>
+<li>Set the <strong>You Are the Mutineer</strong> card aside. Separate
+the other Loyalty cards into a <em>You Are a Cylon</em> pile and a
+<em>You Are Not a Cylon</em> pile. The Not-a-Cylon pile is the 18 plain
+cards <strong>plus the 5 Final Five cards</strong>. Shuffle each
+pile.</li>
+<li>Build the Loyalty deck: <strong>2 <em>You Are a Cylon</em> + 11
+<em>You Are Not a Cylon</em> + the Mutineer = 14 cards.</strong>
+<ul>
+<li>+1 Not-a-Cylon if someone chose the <strong>original Gaius
+Baltar</strong> (Political Leader). <strong>Not</strong> for the
+alternate (Support) Baltar.</li>
+<li>+1 Not-a-Cylon if someone chose <strong>Sharon "Boomer"
+Valerii</strong>.</li>
+</ul></li>
+<li>Return the unused Cylon cards to the box <strong>without
+looking</strong>. Keep the leftover <strong>Not-a-Cylon pile</strong>
+beside the Loyalty deck, clearly separate; executions draw from it.</li>
+<li>Shuffle the Loyalty deck and deal <strong>1 card face down to each
+non-Leader player</strong>. Original Baltar gets 2. The Cylon Leader
+gets none.</li>
+<li><strong>If someone is dealt the Mutineer,</strong> they reveal it at
+once, draw another Loyalty card, draw 1 Mutiny card and hand over any
+titles they hold (§15.5).</li>
+</ul>
+<p><em>Why 14 cards?</em> The Daybreak chart for 7 players is 2 Cylon +
+10 Not-a-Cylon + the Mutineer. The 11th Not-a-Cylon card is
+<strong>Exodus's rule</strong>: when using Exodus, add 1. Six players
+receive Loyalty cards (6 at setup, 6 at the Sleeper phase) and the
+Mutineer's extra draw makes 13, so <strong>one card is never
+dealt</strong>. That leaves about a 1-in-7 chance that one Cylon card
+sits out.</p>
+<p><strong>9. Motives.</strong> Deal the Cylon Leader <strong>2 Motive
+cards</strong>. Give them the <strong>Daybreak Infiltration reference
+card</strong>.</p>
+<p><strong>10. Read.</strong> Everyone takes <strong>30 seconds</strong>
+to read their Loyalty or Motive cards, even if the card is short, so
+reading time gives nothing away.</p>
+<p><strong>11. Starting Skill cards.</strong> Every player
+<strong>except the first player</strong> draws <strong>3 Skill
+cards</strong> from their skill set, in any combination the set allows.
+The first player draws at the start of their first turn. The
+<strong>Cylon Leader draws 2</strong>, except Athena, who starts
+Infiltrating and draws 3.</p>
+<hr />
+<h2 id="5-core-concepts-and-secrecy">5. Core Concepts and Secrecy</h2>
+<h3 id="51-human-players-and-cylon-players">5.1 "Human players" and
+"Cylon players"</h3>
+<ul>
+<li><strong>Players</strong> means everyone.</li>
+<li><strong>Cylon players</strong> means <em>revealed</em> Cylons, plus
+a Cylon Leader who is <strong>not</strong> Infiltrating.</li>
+<li><strong>Human players</strong> means everyone else, including hidden
+Cylons and an <strong>Infiltrating</strong> Cylon Leader.</li>
+</ul>
+<h3 id="52-secrecy-rules">5.2 Secrecy rules</h3>
+<p>These rules keep hidden Cylons from being found by mechanical
+deduction.</p>
+<ul>
+<li><strong>Golden rule:</strong> you may only use "polar opposites",
+<strong>high/low</strong> or <strong>a lot/a little</strong>. Never
+"medium", "pretty high" or exact numbers. The one exception: you may say
+"a medium amount" when you're playing several cards into a check.</li>
+<li><strong>Skill checks:</strong> never state the exact strength,
+colour or type of cards you hold or play, and never say afterwards which
+cards were yours. You <strong>may</strong> say <em>how many</em> cards
+you're playing, because that's public.</li>
+<li><strong>Asking about abilities:</strong> you may ask if anyone holds
+a specific card ("does anyone have Strategic Planning?"). Answering is
+optional. Don't recite your hand.</li>
+<li><strong>Loyalty cards:</strong> if you look at someone's Loyalty
+cards, you may only say "human" or "Cylon". Never mention card text or
+how many Cylon cards you saw. The owner is told which card was looked
+at.</li>
+<li><strong>Final Five:</strong> you can't say you have one or describe
+its text. You <strong>may</strong> hint, for example "you really don't
+want to look at my cards", whether or not it's true.</li>
+<li><strong>Top of a deck:</strong> when you see an upcoming Crisis or
+Destination card, you may only call it "good" or "bad".</li>
+<li><strong>Civilian ships:</strong> if you see a civilian ship's face,
+you may only say "a lot" or "a little".</li>
+<li><strong>Revealed Cylons</strong> still keep their hands and Super
+Crises secret.</li>
+<li><strong>Communications:</strong> civilian ships looked at with
+Communications are looked at secretly; don't show them.</li>
+<li><strong>Open information:</strong> the number of cards in each hand,
+each Skill deck, the Quorum deck and the Destiny deck; the top card of
+each discard pile (but don't count discard piles).</li>
+<li><strong>Accusations</strong> are always allowed and have no rules
+effect.</li>
+</ul>
+<hr />
+<h2 id="6-characters-miracles-and-titles">6. Characters, Miracles and
+Titles</h2>
+<h3 id="61-character-sheets">6.1 Character sheets</h3>
+<p>Each sheet shows the character's type, two positive abilities, one
+negative ability, a <strong>once-per-game (miracle) ability</strong>, a
+skill set and a setup location. Abilities starting
+<strong>"Action:"</strong> use your action for the turn. Other abilities
+trigger when their text says. If several players want to use abilities
+at the same moment, the <strong>current player decides the
+order</strong>.</p>
+<h3 id="62-miracle-tokens">6.2 Miracle tokens</h3>
+<ul>
+<li>Using your character's once-per-game ability costs your
+<strong>miracle token</strong>. No token, no miracle.</li>
+<li>You can hold <strong>only one</strong> token. If you gain one after
+spending yours, you can use the ability again.</li>
+<li><strong>Alternate Baltar (Broadcast)</strong> can hold up to 3
+tokens and must spend <strong>3</strong> to use <em>Broadcast</em>. He
+can be chosen to gain a token while he has fewer than 3.</li>
+<li>When told to "choose a player to gain a miracle token", you must
+choose someone without one. If everyone eligible already has one, nobody
+gains one. A Cylon Leader without a token can be chosen even when not
+Infiltrating.</li>
+<li>Revealing as a Cylon discards your token, and <strong>revealed
+Cylons can't gain tokens</strong>. Cylon Leaders keep theirs when an
+Infiltration ends.</li>
+<li>A character chosen after an execution does <strong>not</strong> get
+a new token.</li>
+</ul>
+<h3 id="63-the-president">6.3 The President</h3>
+<ul>
+<li>Holds the <strong>Quorum hand</strong>. Quorum cards give actions
+only the President can use. Draw more with the President title card or
+the Quorum Chamber location.</li>
+<li>Quorum hand limit: <strong>10</strong> at the end of any turn.</li>
+<li>Keeps the title while in the Brig.</li>
+</ul>
+<h3 id="64-the-admiral">6.4 The Admiral</h3>
+<ul>
+<li>Uses the <strong>Exodus Admiral title card</strong>. Starts with
+<strong>2 nukes</strong> and may never hold more than 3.</li>
+<li><strong>Chooses the destination</strong> at each jump (§13).</li>
+<li><strong>Loses the title if sent to the Brig</strong>; it goes to the
+highest in line who isn't in the Brig.</li>
+</ul>
+<h3 id="65-the-cag-commander-air-group">6.5 The CAG (Commander, Air
+Group)</h3>
+<ul>
+<li>Uses the CAG title card's ability, and makes the "CAG Chooses"
+decisions on crises.</li>
+<li><strong>Places civilian ships</strong> whenever an effect places one
+without naming the area. The CAG must pick an area
+<strong>without</strong> a civilian ship if possible; if every area has
+one, any area.</li>
+<li><strong>Loses the title if sent to the Brig</strong>, like the
+Admiral.</li>
+</ul>
+<h3 id="66-succession-all-three-titles">6.6 Succession (all three
+titles)</h3>
+<ul>
+<li>A title passes to the <strong>highest in that line</strong> if the
+holder is <strong>executed</strong> or <strong>revealed as a
+Cylon</strong>. When a character is executed, the replacement character
+is included in this check.</li>
+<li>The Admiral and CAG titles also pass if the holder is <strong>sent
+to the Brig</strong>. They go to the highest in line
+<strong>not</strong> in the Brig. If every human is in the Brig, the
+highest-ranked prisoner holds the title until someone gets out; the
+first one out takes it immediately.</li>
+<li>A title-holder who leaves the Brig does <strong>not</strong>
+automatically get the title back.</li>
+<li>A new character chosen after an execution does <strong>not</strong>
+take a title just for ranking higher.</li>
+<li>An Infiltrating Cylon Leader can <strong>never</strong> be
+President, Admiral or CAG.</li>
+<li>A player who <strong>receives the Mutineer card</strong> gives each
+title they hold to the next in line, not counting themselves (§15.5).
+After that they can gain titles normally.</li>
+</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr class="header">
+<th>#</th>
+<th>President</th>
+<th>Admiral</th>
+<th>CAG</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Laura Roslin</td>
+<td>Helena Cain</td>
+<td>Lee "Apollo" Adama (Pilot)</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Gaius Baltar (Political)</td>
+<td>William Adama</td>
+<td>Kara "Starbuck" Thrace</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Lee Adama (Political)</td>
+<td>Saul Tigh</td>
+<td>Louanne "Kat" Katraine</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Tom Zarek (Political)</td>
+<td>Helo Agathon (Military)</td>
+<td>Helo Agathon (Pilot)</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Romo Lampkin</td>
+<td>Felix Gaeta</td>
+<td>Sharon "Boomer" Valerii</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Tory Foster</td>
+<td>Louis Hoshi</td>
+<td>Brendan "Hot Dog" Costanza</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Ellen Tigh</td>
+<td>Tom Zarek (Military)</td>
+<td>Samuel T. Anders</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Lee "Apollo" Adama (Pilot)</td>
+<td>Lee "Apollo" Adama (Pilot)</td>
+<td>Lee Adama (Political)</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>Tom Zarek (Military)</td>
+<td>Anastasia "Dee" Dualla</td>
+<td>Helo Agathon (Military)</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>Felix Gaeta</td>
+<td>Helo Agathon (Pilot)</td>
+<td>William Adama</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>William Adama</td>
+<td>Kara "Starbuck" Thrace</td>
+<td>Helena Cain</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>Helo Agathon (Military)</td>
+<td>Louanne "Kat" Katraine</td>
+<td>Saul Tigh</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>"Chief" Galen Tyrol</td>
+<td>Sharon "Boomer" Valerii</td>
+<td>Felix Gaeta</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>Gaius Baltar (Support)</td>
+<td>Brendan "Hot Dog" Costanza</td>
+<td>Anastasia "Dee" Dualla</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>Callandra "Cally" Tyrol</td>
+<td>Samuel T. Anders</td>
+<td>Louis Hoshi</td>
+</tr>
+<tr class="even">
+<td>16</td>
+<td>Sherman "Doc" Cottle</td>
+<td>"Chief" Galen Tyrol</td>
+<td>Tom Zarek (Military)</td>
+</tr>
+<tr class="odd">
+<td>17</td>
+<td>Helena Cain</td>
+<td>Callandra "Cally" Tyrol</td>
+<td>"Chief" Galen Tyrol</td>
+</tr>
+<tr class="even">
+<td>18</td>
+<td>Anastasia "Dee" Dualla</td>
+<td>Sherman "Doc" Cottle</td>
+<td>Callandra "Cally" Tyrol</td>
+</tr>
+<tr class="odd">
+<td>19</td>
+<td>Louis Hoshi</td>
+<td>Lee Adama (Political)</td>
+<td>Sherman "Doc" Cottle</td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td>Helo Agathon (Pilot)</td>
+<td>Tom Zarek (Political)</td>
+<td>Tom Zarek (Political)</td>
+</tr>
+<tr class="odd">
+<td>21</td>
+<td>Sharon "Boomer" Valerii</td>
+<td>Ellen Tigh</td>
+<td>Ellen Tigh</td>
+</tr>
+<tr class="even">
+<td>22</td>
+<td>Saul Tigh</td>
+<td>Gaius Baltar (Support)</td>
+<td>Gaius Baltar (Support)</td>
+</tr>
+<tr class="odd">
+<td>23</td>
+<td>Brendan "Hot Dog" Costanza</td>
+<td>Gaius Baltar (Political)</td>
+<td>Gaius Baltar (Political)</td>
+</tr>
+<tr class="even">
+<td>24</td>
+<td>Samuel T. Anders</td>
+<td>Romo Lampkin</td>
+<td>Tory Foster</td>
+</tr>
+<tr class="odd">
+<td>25</td>
+<td>Kara "Starbuck" Thrace</td>
+<td>Tory Foster</td>
+<td>Romo Lampkin</td>
+</tr>
+<tr class="even">
+<td>26</td>
+<td>Louanne "Kat" Katraine</td>
+<td>Laura Roslin</td>
+<td>Laura Roslin</td>
+</tr>
+</tbody>
+</table></div>
+<p><em>(Source: CR2.0 §4.4. Cylon Leaders are not in any line.)</em></p>
+<hr />
+<h2 id="7-the-game-turn">7. The Game Turn</h2>
+<p>Turns go clockwise. Each turn has seven steps.</p>
+<h3 id="step-1-receive-skills">Step 1: Receive Skills</h3>
+<ul>
+<li>Draw the Skill cards listed on your sheet, from your own skill set,
+<strong>no matter how many you already hold</strong>.</li>
+<li><strong>Multi-skills</strong> (two-coloured entries): decide how
+many to draw from each type, totalling the listed number.</li>
+<li>In <strong>Sickbay</strong> or on the <strong>Resurrection
+Ship</strong>: draw only <strong>1</strong> card.</li>
+<li><strong>Revealed Cylons:</strong> draw 2 cards of any types,
+<strong>each from a different deck</strong>.</li>
+<li><strong>Infiltrating Cylon Leader:</strong> draw 1 extra card from
+your set (3 total). It may be a type you've already drawn.</li>
+<li>If a Skill deck and its discard pile are both empty, you can't draw
+that type until cards are discarded.</li>
+</ul>
+<h3 id="step-2-movement">Step 2: Movement</h3>
+<ul>
+<li>You may move your character to any location you're allowed to use.
+<strong>Humans can't enter Cylon locations; revealed Cylons can only
+move among Cylon locations.</strong></li>
+<li><strong>Changing ships costs 1 Skill card.</strong> That covers
+Galactica, Colonial One, Pegasus, Demetrius and the Rebel Basestar, and
+leaving a viper for a ship.</li>
+<li>Nobody may <em>move</em> into a <strong>hazardous</strong> location
+(yellow-striped border: Brig, Sickbay, Resurrection Ship, Hub
+Destroyed). You only go there when an effect sends you.</li>
+<li><strong>Movement abilities</strong> replace moving; you do one or
+the other. Only one per turn, and only on your own turn: not when moved
+by someone else's card, such as <em>Executive Order</em>. They can be
+used from the Brig. An effect that prohibits a type of action (e.g. "no
+Piloting actions") also prohibits Movement abilities of that type.</li>
+<li><strong>Piloting a viper:</strong> move the viper one area (Mark
+VII: up to two), <strong>or</strong> discard 1 Skill card to return to
+any ship location (the viper goes to the Reserves and the piloting token
+comes off).</li>
+<li><strong>Landing a viper is a move, never an action.</strong> Do it
+in your Movement step, or with a move granted by <em>Executive
+Order</em> or <em>State of Emergency</em>.</li>
+</ul>
+<h3 id="step-3-action">Step 3: Action</h3>
+<p>Choose <strong>one</strong>:</p>
+<ul>
+<li><strong>Activate your location's action</strong> (not if it's
+damaged).</li>
+<li>Play a <strong>Skill card's</strong> Action.</li>
+<li>Use a <strong>character sheet</strong> Action.</li>
+<li><strong>Activate your piloted viper</strong>: move, attack or escort
+(§11.1).</li>
+<li>Use a <strong>Title, Quorum or Mutiny card</strong> Action.</li>
+<li><strong>Reveal</strong> a <em>You Are a Cylon</em> card and resolve
+its Action (not allowed from the Brig).</li>
+<li><strong>Infiltrating Cylon Leader:</strong> return to the
+Resurrection Ship (§17.4).</li>
+<li><strong>Do nothing.</strong></li>
+</ul>
+<p>You may take any action from the Brig. The Brig only limits movement
+and how many cards you put into skill checks.</p>
+<h3 id="step-4-crisis">Step 4: Crisis</h3>
+<p>Draw the top Crisis card, read it aloud and resolve it (§10).</p>
+<ul>
+<li><strong>Skip this step if:</strong> you're a <strong>revealed
+Cylon</strong>, you're <strong>in the Brig</strong>, or <strong>anyone
+activated the Demetrius Bridge this turn</strong> (§14).</li>
+</ul>
+<h3 id="step-5-activate-cylon-ships">Step 5: Activate Cylon Ships</h3>
+<p>Resolve the Cylon ship icon(s) on the Crisis card (§11.6). Revealed
+Cylons skip this step. With no crisis drawn, there's nothing to
+activate.</p>
+<h3 id="step-6-prepare-for-jump">Step 6: Prepare for Jump</h3>
+<p>If the crisis shows the <strong>prepare for jump</strong> icon,
+advance the fleet marker one space. Reaching <strong>Auto Jump</strong>
+jumps the fleet (§13). This step still happens on a revealed Cylon's
+turn if they resolved a crisis through <strong>Caprica</strong>.
+<strong>On the Mutineer's turn,</strong> resolving a jump icon in this
+step makes them draw a Mutiny card (§15.5).</p>
+<h3 id="step-7-discard">Step 7: Discard</h3>
+<p>At the end of <strong>every</strong> turn, anyone holding more than
+<strong>10 Skill cards</strong> discards down to 10, and the President
+discards down to <strong>10 Quorum cards</strong>. Super Crises don't
+count. Then discard the turn's Crisis card and pass the current player
+token to the left.</p>
+<hr />
+<h2 id="8-movement-and-locations">8. Movement and Locations</h2>
+<p>Each location's action is printed on the board or overlay; read it
+from there. This section covers the rules that apply <em>around</em>
+those locations.</p>
+<h3 id="81-the-ships-and-their-locations">8.1 The ships and their
+locations</h3>
+<ul>
+<li><strong>Galactica:</strong> FTL Control, Weapons Control, Command,
+Admiral's Quarters, Hangar Deck, Armory, Research Lab, Communications,
+plus the hazardous <strong>Brig</strong> and
+<strong>Sickbay</strong>.</li>
+<li><strong>Colonial One:</strong> use the <strong>Daybreak
+overlay</strong> locations. If Colonial One is destroyed (e.g. by the
+<em>Bomb on Colonial 1</em> Super Crisis), flip the overlay and send
+everyone on it to Sickbay.</li>
+<li><strong>Pegasus:</strong> Pegasus CIC, Airlock, Main Batteries,
+Engine Room.</li>
+<li><strong>Demetrius</strong> (§14) and, if it arrives, the
+<strong>Rebel Basestar</strong> (§14.5).</li>
+<li><strong>Cylon locations:</strong> use the <strong>Daybreak Cylon
+Locations overlay</strong>, plus the <strong>Basestar Bridge</strong> on
+the Cylon Fleet board.</li>
+</ul>
+<h3 id="82-board-skill-checks">8.2 Board skill checks</h3>
+<ul>
+<li><strong>Admiral's Quarters:</strong> accuse any character.
+Difficulty <strong>7</strong>, Leadership + Tactics. Pass sends the
+accused to the Brig.</li>
+<li><strong>Brig:</strong> try to escape. Difficulty <strong>7</strong>,
+Politics + Tactics. Pass lets you move to any <strong>Galactica</strong>
+location.</li>
+<li><strong>Airlock (Pegasus):</strong> used to <strong>execute</strong>
+a character, as printed on the board. On the Airlock, <strong>Treachery
+cards count as positive strength</strong>.</li>
+<li>Everyone may contribute to these checks under the normal skill check
+rules.</li>
+</ul>
+<h3 id="83-the-brig">8.3 The Brig</h3>
+<ul>
+<li>You can't move out except by passing the Brig check or through an
+effect that specifically mentions the Brig: <em>Presidential Pardon</em>
+(Quorum), <em>Make a Deal</em> (Mutiny), and the <em>Dishonest
+Tactics</em> and <em>Rebuild Trust</em> crises.</li>
+<li>You <strong>skip the Crisis step</strong>.</li>
+<li>You may play only <strong>1</strong> Skill card into each skill
+check.</li>
+<li>You still draw Skill cards normally and may take actions and use
+Movement abilities.</li>
+<li>A Cylon who reveals <strong>in the Brig</strong> doesn't get the
+Action on their Loyalty card.</li>
+<li>An effect can't choose someone who's already in the Brig, a revealed
+Cylon, or Helo before he's on the board.</li>
+<li>If you're in the Brig and an effect sends you to Sickbay, you stay
+in the Brig.</li>
+</ul>
+<h3 id="84-sickbay">8.4 Sickbay</h3>
+<ul>
+<li>You draw only <strong>1</strong> Skill card on your turn.</li>
+<li>You move out freely during Movement.</li>
+<li>The same targeting limits as the Brig apply.</li>
+<li>If an <em>Executive Order</em> moves you out of Sickbay before your
+turn starts, you draw your full skill set that turn.</li>
+</ul>
+<h3 id="85-damaged-locations">8.5 Damaged locations</h3>
+<ul>
+<li>A damaged location's action can't be used until it's repaired. You
+may still stand there.</li>
+<li>A location being damaged sends everyone in it to
+<strong>Sickbay</strong>.</li>
+<li>Damaged <strong>FTL Control</strong> doesn't stop the fleet marker
+advancing or the fleet auto-jumping.</li>
+</ul>
+<h3 id="86-cylon-locations-overlay">8.6 Cylon locations (overlay)</h3>
+<ul>
+<li><strong>Resurrection Ship</strong> is <strong>hazardous</strong>.
+Revealed and executed Cylons go there, and a Cylon there draws only 1
+Skill card.</li>
+<li><strong>Hub Destroyed:</strong> if an effect flips the overlay, pick
+up any tokens on it, flip it, and put them back in the same locations.
+Anyone on the Resurrection Ship goes to <em>Hub Destroyed</em>, which is
+then used for anything that mentions the Resurrection Ship.</li>
+<li><strong>Caprica:</strong> on the Daybreak overlay, using Caprica
+<strong>does not skip</strong> the Prepare for Jump step.</li>
+<li><strong>Cylon Fleet location:</strong> "activate all ships of one
+type" works exactly like resolving that activation icon, so it can place
+ships on the Cylon Fleet board and advance the pursuit marker.
+Activating heavy raiders this way <strong>advances centurions</strong>
+on the Boarding Party track even if no heavy raiders or basestars are on
+the board. "Launch 2 raiders and 1 heavy raider from each basestar" only
+affects basestars on the main board and never adds ships to the Cylon
+Fleet board.</li>
+<li><strong>Human Fleet:</strong> this is where a Cylon Leader starts an
+Infiltration (§17.4).</li>
+<li><strong>Basestar Bridge</strong> (Cylon Fleet board): only revealed
+Cylons may go there. Moving between it and the overlay's Cylon locations
+costs <strong>no</strong> card. Activating it resolves <strong>two
+different</strong> of its four abilities, one at a time; the same
+ability can't be used twice in one activation. If it tells you to place
+a basestar and both basestars are already on a board, nothing
+happens.</li>
+</ul>
+<hr />
+<h2 id="9-skill-cards-and-skill-checks">9. Skill Cards and Skill
+Checks</h2>
+<h3 id="91-skill-types">9.1 Skill types</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Colour</th>
+<th>Typical use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Politics</td>
+<td>Yellow</td>
+<td>Morale; drawing outside your skill set. The most common crisis
+skill.</td>
+</tr>
+<tr class="even">
+<td>Leadership</td>
+<td>Green</td>
+<td>Moving other players; granting actions. The second most common
+crisis skill.</td>
+</tr>
+<tr class="odd">
+<td>Tactics</td>
+<td>Purple</td>
+<td>Die-roll bonuses; scouting destinations.</td>
+</tr>
+<tr class="even">
+<td>Piloting</td>
+<td>Red</td>
+<td>Rerolling enemy attacks; extra attacks.</td>
+</tr>
+<tr class="odd">
+<td>Engineering</td>
+<td>Blue</td>
+<td>Repairing vipers and locations.</td>
+</tr>
+<tr class="even">
+<td>Treachery</td>
+<td>Brown</td>
+<td>Sabotage; mainly for Cylons.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Normal Skill decks range from strength 0 to 6 (average about 2.2).
+Treachery has twelve 0s and the rest 3–5.</p>
+<h3 id="92-destiny-deck">9.2 Destiny deck</h3>
+<ul>
+<li>2 cards of each of the six types, <strong>including
+Treachery</strong> (12 cards).</li>
+<li><strong>Two</strong> Destiny cards go into every skill check.</li>
+<li>When the Destiny deck runs out, the current player builds a new one
+the same way.</li>
+<li><strong>Tip:</strong> appoint a <strong>Skill Supervisor</strong> to
+sort discards, reshuffle empty decks and rebuild the Destiny deck.</li>
+</ul>
+<h3 id="93-skill-check-procedure">9.3 Skill check procedure</h3>
+<ol type="1">
+<li><p><strong>Read.</strong> The current player reads the whole card or
+location aloud. Players discuss within the secrecy rules. Any required
+choice (current player, President, Admiral or CAG) is made
+<strong>now</strong>. A choice without a pass/fail effect means you just
+follow its instructions instead of making a check.</p></li>
+<li><p><strong>Destiny.</strong> Deal 2 Destiny cards face down to start
+the pile.</p></li>
+<li><p><strong>Play skills.</strong> Starting <strong>left of the
+current player</strong> and ending with the current player, each player
+gets <strong>one</strong> chance to add cards face down:</p>
+<ul>
+<li><strong>Brig:</strong> 1 card.</li>
+<li><strong>Revealed Cylon:</strong> 1 card, and it's optional.</li>
+<li><strong>Infiltrating Cylon Leader:</strong> up to 2 (1 if in the
+Brig).</li>
+<li><strong>Anyone else:</strong> any number.</li>
+</ul>
+<p>Card text is ignored except for Skill Check Abilities.</p></li>
+<li><p><strong>Shuffle and divide.</strong> Shuffle the pile and deal it
+face up into <strong>matching</strong> cards (colours listed on the
+check) and <strong>non-matching</strong> cards.</p></li>
+<li><p><strong>Abilities.</strong></p>
+<ul>
+<li>First, the current player resolves every <strong>Skill Check
+Ability</strong> (icon beside the strength) in any order. Duplicates of
+the same ability resolve once.</li>
+<li>Then, if the crisis has a <strong>Consequence</strong> result and at
+least one card with the Skill Check Ability icon was played, resolve the
+Consequence. This happens whether the check passes or fails.</li>
+<li>Then, if the check is <strong>Reckless</strong>, resolve the
+Reckless procedure (§9.6).</li>
+</ul></li>
+<li><p><strong>Total.</strong> Matching strength minus non-matching
+strength.</p></li>
+<li><p><strong>Result.</strong> If the total is at least the difficulty,
+apply <strong>pass</strong>. Otherwise apply the <strong>partial
+pass</strong> if the total meets that number, or else
+<strong>fail</strong>. Discard all the cards to their piles.</p></li>
+</ol>
+<h3 id="94-skill-check-abilities">9.4 Skill Check Abilities</h3>
+<ul>
+<li>These resolve only when the card is <strong>played into a
+check</strong>, whoever played it: human, Cylon or Destiny.</li>
+<li>If <em>Dogfight</em> or <em>Quick Thinking</em> removes a card
+before its ability resolves, that ability doesn't happen. An ability
+that already resolved stands.</li>
+</ul>
+<h3 id="95-treachery">9.5 Treachery</h3>
+<ul>
+<li>Treachery counts as <strong>negative strength</strong> in checks
+unless the card says otherwise (the Airlock counts it as positive).</li>
+<li>Revealed Cylons may draw Treachery; most humans can't draw it unless
+an effect allows.</li>
+<li><strong>Treachery cards reading "When a player chooses to discard
+this card, he must draw 1 Mutiny Card":</strong>
+<ul>
+<li>Discarding one <em>by choice</em> (to a crisis, for the hand limit,
+or to change ships) draws a Mutiny card.</li>
+<li>Random discards don't trigger it, and neither does playing the card
+into a check.</li>
+<li>You can draw at most <strong>one</strong> Mutiny card per turn this
+way.</li>
+</ul></li>
+</ul>
+<h3 id="96-reckless-skill-checks">9.6 Reckless skill checks</h3>
+<ul>
+<li>One <strong>Reckless</strong> card may be played per check,
+<strong>before any cards are added</strong>. The check is then
+Reckless.</li>
+<li>After all Skill Check Abilities are resolved, flip the top Treachery
+card:
+<ul>
+<li><strong>Strength above 0:</strong> discard it with no effect.</li>
+<li><strong>Strength 0:</strong> flip the next one too. Resolve
+<strong>both</strong> cards' Skill Check Abilities, even ones already
+resolved this check, then discard both.</li>
+</ul></li>
+<li>These cards never count toward strength.</li>
+<li><em>Restore Order</em> can't be played on a Reckless check, and a
+check can't be made Reckless after <em>Restore Order</em>.</li>
+</ul>
+<h3 id="97-movement-abilities-on-skill-cards">9.7 Movement abilities on
+Skill cards</h3>
+<p>See §7 step 2.</p>
+<hr />
+<h2 id="10-crises">10. Crises</h2>
+<h3 id="101-crisis-types">10.1 Crisis types</h3>
+<ul>
+<li><strong>Skill check crises</strong> show a difficulty and coloured
+skill boxes. Some let the current player, President, Admiral or CAG
+choose between the check and an alternative.</li>
+<li><strong>Events</strong> have no check; just follow the text. Some
+include a choice.</li>
+<li>With a <strong>choice</strong>, you may always pick either option,
+even one you can't fully carry out, unless the card forbids it.</li>
+</ul>
+<h3 id="102-card-icons">10.2 Card icons</h3>
+<ul>
+<li><strong>Bottom left:</strong> Cylon ship activation (§11.6).</li>
+<li><strong>Bottom right:</strong> Prepare for Jump.</li>
+</ul>
+<h3 id="103-super-crises">10.3 Super Crises</h3>
+<ul>
+<li>A Cylon receives one on revealing (not if revealed by
+execution).</li>
+<li>Played by activating <strong>Caprica</strong>.</li>
+<li>Resolved like a crisis, but <strong>immune</strong> to abilities
+that affect crises or skill checks.</li>
+</ul>
+<h3 id="104-crisis-mix">10.4 Crisis mix</h3>
+<p>Just for strategy: about 50% of crises hit morale, 23% food, 16%
+population and 11% fuel. 65% have a jump icon.</p>
+<hr />
+<h2 id="11-combat">11. Combat</h2>
+<p>The fleet is <strong>in combat</strong> whenever any Cylon ship is on
+the main board.</p>
+<h3 id="111-activating-vipers">11.1 Activating vipers</h3>
+<p>You usually activate unmanned vipers through
+<strong>Command</strong>. Each viper may be activated several times in a
+turn, but never one another player is piloting. Each activation is
+<strong>one</strong> of:</p>
+<ul>
+<li><strong>Launch:</strong> Reserves to a space area with a
+<strong>viper launch icon</strong>.</li>
+<li><strong>Move:</strong> to an adjacent area. <strong>Mark
+VII:</strong> up to two areas. Vipers go around Galactica, never over
+it.</li>
+<li><strong>Attack:</strong> a Cylon ship in the same area (roll on the
+Attack Table, §11.7).</li>
+<li><strong>Escort:</strong> shuffle a civilian ship in the viper's area
+back into the unused civilian pile.</li>
+</ul>
+<h3 id="112-piloting">11.2 Piloting</h3>
+<ul>
+<li>Characters with <strong>Piloting</strong> in their skill set can
+pilot. Use the <strong>Hangar Deck</strong> action to launch a viper
+with yourself in it: put your piloting token under it and your stand-up
+on your sheet. If none are in the Reserves, you may pull an unmanned
+viper back from a space area to use.</li>
+<li>While piloting, your Action may be activating your own viper.</li>
+<li>If your viper is <strong>damaged or destroyed</strong>, you go to
+<strong>Sickbay</strong>.</li>
+<li>If you're sent to the Brig or Sickbay while piloting, your viper
+returns to the Reserves.</li>
+<li><strong>On a jump:</strong> pilots return to the Hangar Deck and
+their vipers to the Reserves, except assault raptors (§11.4).</li>
+</ul>
+<h3 id="113-viper-mark-viis">11.3 Viper Mark VIIs</h3>
+<ul>
+<li>They start <strong>damaged</strong> and must be repaired before
+use.</li>
+<li>They move up to <strong>two</strong> areas, and are damaged on
+<strong>6–7</strong> and destroyed on <strong>8</strong>.</li>
+<li>They count as vipers for every effect; the current player chooses
+which kind to use.</li>
+</ul>
+<h3 id="114-assault-raptors">11.4 Assault Raptors</h3>
+<ul>
+<li>Start with 1 in the Reserves. Gain more through <em>Raptor
+Specialist</em> (Skill), <em>Weapons Armed</em> (Mutiny) or <em>Trial by
+Fire</em> (Crisis). If an effect says to destroy a raptor to build one,
+the raptor must come from the Reserves.</li>
+<li>They count as <strong>vipers</strong> for all effects, never as
+raptors.</li>
+<li>They're <strong>never damaged</strong>, only destroyed, on a roll of
+<strong>7–8</strong>. If you must pick a viper to damage and pick an
+assault raptor, it's destroyed.</li>
+<li><strong>On a jump,</strong> a piloted assault raptor may
+<strong>stay</strong> in its space area. The current player may keep
+unmanned ones in place too.</li>
+</ul>
+<h3 id="115-raptors">11.5 Raptors</h3>
+<p>Raptors never fight. Cards may tell you to <strong>risk</strong> a
+raptor: there must be one in the Reserves, you roll, and on a result
+below the target the risked raptor is destroyed and you get no
+reward.</p>
+<h3 id="116-cylon-ship-activation">11.6 Cylon ship activation</h3>
+<ul>
+<li>Resolve icons <strong>left to right</strong>. Activate ships one
+space area at a time, in the current player's order. Each ship activates
+at most once per turn.</li>
+<li>Each ship does the <strong>first</strong> thing on its list it can
+do.</li>
+<li>With the Cylon Fleet board, an activation that would do nothing puts
+a ship on the Cylon Fleet board instead (§12).</li>
+</ul>
+<p><strong>Activate Raiders:</strong></p>
+<ol type="1">
+<li>Attack a viper in its area. An unmanned viper is attacked first; if
+two are piloted, the current player chooses.</li>
+<li>Otherwise destroy a civilian ship in its area; the current player
+chooses which.</li>
+<li>Otherwise move one area toward the nearest civilian ship. On a tie,
+move clockwise.</li>
+<li>Otherwise, if no civilian ships are on the board, attack
+Galactica.</li>
+<li>If no raiders are on the board, each basestar launches 2
+raiders.</li>
+<li>If no raiders <strong>and</strong> no basestars are on the board:
+<strong>Cylon Fleet</strong> (§12).</li>
+</ol>
+<p><strong>Launch Raiders:</strong></p>
+<ol type="1">
+<li>Each basestar on the main board launches <strong>3</strong>
+raiders.</li>
+<li>If no basestars are on the main board: <strong>Cylon
+Fleet</strong>.</li>
+</ol>
+<p><em>Exception:</em> if the only basestar on the board has a Disabled
+Hangar token, no new basestar is placed and the pursuit marker doesn't
+move.</p>
+<p><strong>Activate Heavy Raiders and Centurions:</strong></p>
+<ol type="1">
+<li>Every <strong>centurion</strong> on the Boarding Party track
+advances one space. This happens even when a revealed Cylon causes the
+activation.</li>
+<li>Heavy raiders move toward the nearest area with a viper launch icon.
+A heavy raider that <strong>starts</strong> its move in such an area
+boards Galactica: remove it and put a centurion on the track's start. If
+all 4 centurions are already out, the heavy raider stays.</li>
+<li>If no heavy raiders are on the board, each basestar launches 1.</li>
+<li>If no heavy raiders, centurions or basestars are on the main board:
+<strong>Cylon Fleet</strong>.</li>
+</ol>
+<p><strong>Activate Basestars:</strong></p>
+<ol type="1">
+<li>Each basestar attacks: roll to damage <strong>Galactica or
+Pegasus</strong> (§11.8).</li>
+<li>If no basestars are on the main board: <strong>Cylon
+Fleet</strong>.</li>
+</ol>
+<p><em>Exception:</em> if the only basestar has a Disabled Weapons
+token, nothing is placed and the pursuit marker doesn't move.</p>
+<p><strong>Centurions:</strong></p>
+<ul>
+<li>Several centurions can share a space on the Boarding Party track;
+they don't push each other.</li>
+<li>Destroy them with the <strong>Armory</strong> action.</li>
+<li>A centurion reaching the end of the Boarding Party track means
+<strong>the Cylons win</strong>.</li>
+</ul>
+<h3 id="117-attack-table-d8">11.7 Attack Table (d8)</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr class="header">
+<th>Target</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Raider</td>
+<td>3–8 destroyed</td>
+</tr>
+<tr class="even">
+<td>Heavy raider</td>
+<td>7–8 destroyed</td>
+</tr>
+<tr class="odd">
+<td>Viper</td>
+<td>5–7 damaged, 8 destroyed</td>
+</tr>
+<tr class="even">
+<td>Viper Mark VII</td>
+<td>6–7 damaged, 8 destroyed</td>
+</tr>
+<tr class="odd">
+<td>Assault raptor</td>
+<td>7–8 destroyed</td>
+</tr>
+<tr class="even">
+<td>Civilian ship</td>
+<td>Automatically destroyed</td>
+</tr>
+<tr class="odd">
+<td>Galactica, attacked by a raider</td>
+<td>8 damaged</td>
+</tr>
+<tr class="even">
+<td>Galactica, attacked by a basestar</td>
+<td>4–8 damaged</td>
+</tr>
+<tr class="odd">
+<td>Basestar, attacked by a viper</td>
+<td>8 damaged</td>
+</tr>
+<tr class="even">
+<td>Basestar, attacked by an assault raptor</td>
+<td>7–8 damaged</td>
+</tr>
+<tr class="odd">
+<td>Basestar, attacked by Galactica (Weapons Control)</td>
+<td>5–8 damaged</td>
+</tr>
+<tr class="even">
+<td><strong>Nuke</strong> (at a space area)</td>
+<td>1–2 damage a basestar twice · 3–6 destroy a basestar · 7 destroy a
+basestar and 3 raiders · 8 destroy <strong>every</strong> ship in the
+area, human ships included</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>Players may never attack human ships.</li>
+<li>After all modifiers, a result above 8 counts as 8 and below 1 counts
+as 1.</li>
+<li><strong>Nukes:</strong>
+<ul>
+<li><strong>Supply:</strong> the Admiral holds the nuke tokens (2 at the
+start, never more than 3), and they pass with the Admiral title. The
+third token starts beside the board.</li>
+<li><strong>Launching:</strong> the Admiral spends their
+<strong>Action</strong> using the nuke action on the Admiral title card,
+picks a <strong>space area</strong> (not a basestar), and rolls on the
+Nuke row above. With several basestars in the area, the Admiral chooses
+which is hit.</li>
+<li><strong>After launch:</strong> the token goes <strong>beside the
+board</strong> whatever the roll, even if nothing suitable was in the
+area. It isn't returned to the box.</li>
+<li><strong>Getting nukes back:</strong> the Engineering card <em>Build
+Nuke</em> lets the Admiral regain a used nuke or gain the third one
+(follow the card's text), up to the maximum of 3. Only tokens beside the
+board can be regained.</li>
+<li>A <strong>7</strong> destroys regular raiders only; heavy raiders
+are unaffected. An <strong>8</strong> also destroys every human ship in
+the area: vipers (including piloted ones, whose pilots go to Sickbay),
+assault raptors and civilian ships.</li>
+<li>The Mutiny card <em>Unauthorized Usage</em> lets its holder launch 1
+nuke themselves; then <strong>all</strong> the Admiral's nukes go beside
+the board. They can still be rebuilt with <em>Build Nuke</em>.</li>
+</ul></li>
+</ul>
+<h3 id="118-damage">11.8 Damage</h3>
+<ul>
+<li><strong>Cylon ships:</strong> a destroyed Cylon ship leaves the
+board but can come back later.</li>
+<li><strong>Vipers:</strong> damaged ones go to the <strong>Damaged
+Vipers</strong> box until repaired. Destroyed vipers, assault raptors
+and raptors leave the game.</li>
+<li><strong>Civilian ships:</strong> a destroyed ship is flipped face
+up, the fleet loses what it shows, and it's removed from the game. There
+are 12: six show 1 population, two show 2 population, one shows
+population + fuel, one shows population + morale, and two show
+nothing.</li>
+<li><strong>Galactica and Pegasus:</strong>
+<ul>
+<li>When Galactica is damaged, the current player draws a random damage
+token and <strong>may draw a Pegasus token instead</strong>.</li>
+<li><strong>Resource tokens:</strong> lose the resource shown, then
+remove the token.</li>
+<li><strong>Location tokens:</strong> place the token on the location;
+everyone there goes to Sickbay. A repaired location returns its token to
+the pool.</li>
+<li><strong>Pegasus destroyed:</strong> all 4 Pegasus locations damaged
+at once. Send everyone on Pegasus to Sickbay and remove the board.</li>
+<li><strong>Galactica destroyed:</strong> 6 Galactica locations damaged
+at once. <strong>The Cylons win.</strong></li>
+</ul></li>
+<li><strong>Basestars:</strong> draw a random <strong>base-game</strong>
+basestar damage token and place it on the basestar.
+<ul>
+<li><strong>Critical Hit:</strong> counts as 2 damage.</li>
+<li><strong>Disabled Hangar:</strong> the basestar can't launch.</li>
+<li><strong>Disabled Weapons:</strong> the basestar can't attack
+Galactica.</li>
+<li><strong>Structural Damage:</strong> +2 to attacks against it.</li>
+<li><strong>3 damage destroys</strong> a basestar; its tokens go back
+into the pool.</li>
+<li>An effect that says "destroy a basestar" removes it with no tokens
+drawn.</li>
+<li><strong>All basestar damage is cleared when the fleet
+jumps.</strong></li>
+</ul></li>
+</ul>
+<hr />
+<h2 id="12-the-cylon-fleet-board">12. The Cylon Fleet Board</h2>
+<p>The Cylon ships chase the fleet all game instead of vanishing at each
+jump.</p>
+<h3 id="121-the-board">12.1 The board</h3>
+<ul>
+<li><strong>Six Cylon space areas</strong> match the six areas around
+Galactica: <strong>7–8</strong> is in front of Galactica,
+<strong>4</strong> and <strong>2</strong> are the launch-icon side,
+<strong>5–6</strong> and <strong>3</strong> are the other side, and
+<strong>1</strong> is behind.</li>
+<li>The <strong>Pursuit track</strong> measures how close a full attack
+is.</li>
+<li>The <strong>Basestar Bridge</strong> is a location for revealed
+Cylons (§8.6).</li>
+</ul>
+<h3 id="122-placing-ships-on-the-cylon-fleet-board">12.2 Placing ships
+on the Cylon Fleet board</h3>
+<ul>
+<li>When an activation finds nothing to act on (the "Cylon Fleet" steps
+in §11.6), place one ship of the listed type on this board. The current
+player <strong>rolls a d8</strong> for which area; roll modifiers such
+as <em>Strategic Planning</em> or Anders's <em>Longshot</em> apply. Then
+<strong>advance the pursuit marker one space</strong>.</li>
+<li><strong>Out of ships:</strong> if no ship of that type is left to
+place, find the <strong>highest-numbered</strong> Cylon space area
+holding one. <strong>All ships of every type</strong> in that area jump
+to the matching area on the main board.</li>
+</ul>
+<h3 id="123-the-pursuit-track">12.3 The Pursuit track</h3>
+<ul>
+<li><strong>Civilian ship spaces:</strong> when the marker lands on a
+space showing one civilian ship, the <strong>CAG</strong> places 1
+civilian ship on the main board. On the two-ship space, the CAG places
+2, one at a time. The CAG should keep them away from where Cylon ships
+are waiting.</li>
+<li><strong>Auto Attack:</strong> when the marker reaches it,
+<strong>every</strong> ship on the Cylon Fleet board jumps to its
+matching area on the main board. Then reset the marker to Start.</li>
+</ul>
+<h3 id="124-placing-ships-on-the-main-board">12.4 Placing ships on the
+main board</h3>
+<p>When a card or icon places Cylon ships on the main board (e.g.
+<em>Cylon Ambush</em>, Launch Raiders):</p>
+<ol type="1">
+<li>Take them from ships on <strong>neither</strong> board.</li>
+<li>If that's not enough, take them from the Cylon Fleet board,
+<strong>lowest-numbered area first</strong>.</li>
+<li>If still not enough, the current player chooses which aren't
+placed.</li>
+</ol>
+<h3 id="125-jumping-with-the-cylon-fleet">12.5 Jumping with the Cylon
+Fleet</h3>
+<ul>
+<li>Cylon ships on the main board move to the <strong>matching Cylon
+space areas</strong>. They aren't removed.</li>
+<li><strong>Civilian ships stay where they are.</strong> They leave only
+when destroyed, escorted or removed by an effect.</li>
+<li>Centurions on the Boarding Party track stay.</li>
+</ul>
+<hr />
+<h2 id="13-jumping-the-fleet">13. Jumping the Fleet</h2>
+<h3 id="131-two-ways-to-jump">13.1 Two ways to jump</h3>
+<ul>
+<li><strong>Auto Jump:</strong> the fleet marker reaches the Auto Jump
+space.</li>
+<li><strong>FTL Control:</strong> usable when the marker is on a
+<strong>blue</strong> space. Roll a d8; on <strong>6 or less</strong>,
+lose population equal to the number on the marker's current space. Then
+jump.</li>
+</ul>
+<h3 id="132-jump-procedure">13.2 Jump procedure</h3>
+<ol type="1">
+<li><strong>Vipers:</strong> vipers in space return to the Reserves and
+pilots go to the Hangar Deck. Assault raptors may stay (§11.4).
+<strong>Civilian ships stay.</strong></li>
+<li><strong>Cylon ships:</strong> main-board Cylon ships move to the
+matching Cylon Fleet areas. <strong>Remove all basestar damage
+tokens.</strong> Centurions stay on their track.</li>
+<li><strong>Mission card:</strong> clear the Active Mission space
+(§14.3).</li>
+<li><strong>Choose destination:</strong> the Admiral draws
+<strong>2</strong> Destination cards, picks one, and puts the other on
+the <strong>bottom</strong> of the deck without showing it.</li>
+<li><strong>Resolve it:</strong> follow its instructions, then place it
+face up next to the Earth Objective card. Its distance number adds to
+the total.</li>
+<li><strong>Objective check:</strong> at <strong>4+</strong> distance
+for the first time, run the <strong>Sleeper Agent phase</strong>
+(§15.4). At <strong>10+</strong> distance, the <strong>next</strong>
+jump is the final one (§20).</li>
+<li><strong>Reset:</strong> move the fleet marker to Start.</li>
+</ol>
+<p>Destinations average about 1.9 distance: 31% are 1, 47% are 2 and 22%
+are 3.</p>
+<hr />
+<h2 id="14-the-search-for-home-earth-demetrius-and-missions">14. The
+Search for Home: Earth, Demetrius and Missions</h2>
+<h3 id="141-earth-objective">14.1 Earth Objective</h3>
+<ul>
+<li>Travel <strong>10 distance</strong>. The <strong>next jump after
+that</strong> ends the game: don't draw a Destination; go to the end
+game (§20).</li>
+<li>Distance comes from Destination cards <strong>and passed distance
+Missions</strong>.</li>
+</ul>
+<h3 id="142-demetrius">14.2 Demetrius</h3>
+<ul>
+<li>Moving onto or off Demetrius costs 1 Skill card, the same as any
+ship change.</li>
+<li>Its locations <strong>can't be damaged</strong>.</li>
+<li>Other Demetrius locations are as printed on the board.</li>
+</ul>
+<h3 id="143-missions-the-bridge">14.3 Missions (the Bridge)</h3>
+<ul>
+<li><strong>Starting one:</strong> a human activates the
+<strong>Bridge</strong> on Demetrius and flips the top Mission card face
+up onto the <strong>Active Mission</strong> space.</li>
+<li><strong>One per jump:</strong> while a card is on Active Mission,
+nobody can use the Bridge. It stays until the next jump.</li>
+<li><strong>No crisis that turn:</strong> if anyone activates the Bridge
+during a turn, the current player <strong>doesn't draw a Crisis
+card</strong> that turn. That also means no crisis-driven Cylon ship
+activation and no crisis jump icon.</li>
+<li><strong>Resolving it:</strong> the mission is a skill check resolved
+immediately. Pass or fail, apply the result printed on the card.</li>
+<li><strong>No boosts:</strong> abilities and cards that affect crises
+or skill checks <strong>don't apply</strong> to missions. That includes
+Adama's <em>Command Authority</em>, Chief's <em>Blind Devotion</em>,
+Athena's <em>For Love</em>, <em>Investigative Committee</em>,
+<em>Restore Order</em>, <em>Declare Emergency</em> and <em>Support the
+People</em>. Skill Check Abilities on cards played into a mission
+<strong>aren't resolved</strong>.</li>
+<li><strong>Limits still apply:</strong> Brig, Cylon and similar limits
+on how many cards a player can contribute still count.</li>
+<li><strong>Distance missions</strong> show a distance number at the
+bottom. <strong>Pass:</strong> the distance counts
+<strong>immediately</strong>. <strong>Fail:</strong> turn the card face
+down on the Active Mission space; it gives no distance.</li>
+<li><strong>Clearing the space at a jump:</strong>
+<ul>
+<li>Face-up card with a distance number: place it next to the Earth
+card.</li>
+<li>Face-up card without one: put it in the Mission discard pile.</li>
+<li>Face-down (failed) card: shuffle it back into the Mission deck.</li>
+</ul></li>
+<li>An empty Mission deck is rebuilt by shuffling the discard pile.</li>
+</ul>
+<p><strong>Mission cards we know</strong> (8 total; read the rest when
+drawn):</p>
+<ul>
+<li><em>Search for Home</em>: +2 distance on a pass.</li>
+<li><em>Attack on the Colony</em>: on a pass, remove all basestars from
+the main board, then remove 1 basestar from the game.</li>
+<li><em>The Red Stripes</em>: on a pass, remove all heavy raiders and
+centurions from the main board, then remove 2 of each from the
+game.</li>
+<li><em>Cylon Civil War</em>: brings in the Rebel Basestar (§14.5).</li>
+</ul>
+<h3 id="144-worked-example">14.4 Worked example</h3>
+<p>The fleet has 8 distance. A human uses the Bridge. <em>Search for
+Home</em> is flipped and passed, and counts +2 immediately, making 10.
+That player draws no crisis this turn. The <strong>next jump</strong>
+ends the game.</p>
+<h3 id="145-the-rebel-basestar">14.5 The Rebel Basestar</h3>
+<ul>
+<li>It enters play when <em>Cylon Civil War</em> resolves. Place the
+board and its <strong>allegiance marker</strong>.</li>
+<li><strong>Pass: human side up.</strong> Humans treat it as another
+ship; moving onto or off it costs 1 Skill card. Cylons can't enter it or
+use its locations.</li>
+<li><strong>Fail: Cylon side up.</strong> Cylon players may discard 1
+Skill card to move between any Cylon overlay location and the Rebel
+Basestar, <strong>and</strong> between the Basestar Bridge and the Rebel
+Basestar. Humans can't enter.</li>
+<li>Its locations <strong>can't be damaged</strong>.</li>
+<li><strong>Raider Bay:</strong> you may activate <strong>only</strong>
+the 2 raiders or 4 vipers placed by <em>that</em> activation. If Apollo
+uses <em>Alert Viper Pilot</em> to jump into one of those vipers, the
+activating player can't activate that viper.</li>
+</ul>
+<hr />
+<h2 id="15-loyalty-the-final-five-and-the-sleeper-agent-phase">15.
+Loyalty, the Final Five and the Sleeper Agent Phase</h2>
+<h3 id="151-loyalty-basics">15.1 Loyalty basics</h3>
+<ul>
+<li>Keep Loyalty cards face down; you may look at your own anytime.</li>
+<li><strong>If you hold even one <em>You Are a Cylon</em> card, you're a
+Cylon</strong>, and your other cards don't matter.</li>
+<li>When an effect looks at one card of a player who has several, the
+card is <strong>chosen at random</strong>.</li>
+</ul>
+<h3 id="152-the-final-five">15.2 The Final Five</h3>
+<ul>
+<li>A Final Five card reads <em>You Are Not a Cylon</em>, and
+<strong>for winning it's exactly a Not-a-Cylon card</strong>. At game
+end it does nothing.</li>
+<li>If you also hold <em>You Are a Cylon</em>, you're simply a
+Cylon.</li>
+<li><strong>The text only triggers</strong> when <strong>another player
+looks at it</strong> through an effect (e.g. Baltar's <em>Cylon
+Detector</em>), or when it's <strong>revealed by
+execution</strong>.</li>
+<li><strong>When looked at:</strong>
+<ul>
+<li>The looker must reveal it and hand it back.</li>
+<li>The owner resolves its text, turns it face down, and shuffles it
+back with their other Loyalty cards.</li>
+<li>If several Final Five cards are seen at once, the <strong>current
+player</strong> orders their effects, even if one causes an
+execution.</li>
+</ul></li>
+<li><strong>When revealed by execution:</strong> resolve its text, then
+remove it from the game. A non-Cylon Final Five character <strong>does
+not resurrect</strong>; the execution resolves as a human (§19).</li>
+<li><strong>Revealed Cylons aren't affected</strong> by Final Five
+text.</li>
+<li>You may never state that you hold one. Hinting is allowed
+(§5.2).</li>
+</ul>
+<h3 id="153-your-starting-cards">15.3 Your starting cards</h3>
+<p>Each non-Leader player has 1 Loyalty card (original Baltar has 2, and
+the Mutineer has 1 besides the Mutineer card). 13 of the deck's 14 cards
+are dealt by the end of the Sleeper phase, so most games have 2 hidden
+Cylons and about 1 game in 7 has only 1. There are about 2–3 Final Five
+cards in the game.</p>
+<h3 id="154-sleeper-agent-phase-at-4-distance">15.4 Sleeper Agent phase
+(at 4+ distance)</h3>
+<ol type="1">
+<li><strong>Deal</strong> 1 Loyalty card to <strong>every player except
+the Cylon Leader</strong>, including revealed Cylons.
+<strong>Boomer's</strong> sheet gives her 2. The <strong>Cylon Leader
+draws 2 Motive cards</strong> instead.</li>
+<li><strong>Cylon players</strong> look at their new face-down Loyalty
+cards and <strong>give all of them to one human player</strong> of their
+choice.</li>
+<li><strong>Mutineer:</strong> a human player who receives the Mutineer
+card (hidden Cylons included) reveals it at once and draws another
+Loyalty card. A revealed Cylon who is dealt it doesn't reveal it; the
+human they pass their cards to reveals it as if it had been dealt to
+them.</li>
+<li><strong>Mutineer still hidden?</strong> If the Mutineer card hasn't
+been revealed by now, in this phase or earlier, the <strong>current
+player chooses a human player to draw 1 more Loyalty card</strong>. If
+that card is the Mutineer, they reveal it but don't draw the usual extra
+card.</li>
+<li>Everyone reads for <strong>30 seconds</strong>.</li>
+</ol>
+<p>A player may become a Cylon now. They can stay hidden or reveal
+later.</p>
+<h3 id="155-the-mutineer">15.5 The Mutineer</h3>
+<p>The <strong>You Are the Mutineer</strong> card is a Loyalty card that
+is never kept secret.</p>
+<ul>
+<li><strong>Team:</strong> it counts as <em>You Are Not a Cylon</em>.
+The Mutineer wins with the humans unless they also hold a <em>You Are a
+Cylon</em> card.</li>
+<li><strong>Receiving it face down</strong> (at setup or the Sleeper
+phase): reveal it immediately and <strong>draw another Loyalty
+card</strong>. That card stays hidden and could be a Cylon card.</li>
+<li><strong>Whenever anyone receives it:</strong> draw <strong>1 Mutiny
+card</strong>, and give each title you hold to the next in line, not
+counting yourself. After that you gain and lose titles normally.</li>
+<li><strong>More Mutiny cards:</strong> on the Mutineer's own turn, if
+one or more <strong>prepare for jump</strong> icons are resolved in the
+Prepare for Jump step, the Mutineer draws <strong>1</strong> Mutiny
+card. This includes a jump-track advance from Pegasus's <strong>Engine
+Room</strong>, and it's one card per step however many icons resolve. A
+turn with no crisis (the Bridge was used, or the Mutineer is in the
+Brig) has no icon and no draw.</li>
+<li><strong>A higher limit:</strong> the Mutineer holds up to
+<strong>2</strong> Mutiny cards. They go to the Brig on drawing a
+<strong>third</strong>, and keep 2 there (§18.3).</li>
+<li><strong>If the Mutineer reveals as a Cylon,</strong> they give the
+card <strong>face up to a human of their choice, at any
+distance</strong>. That player draws 1 Mutiny card and gives up their
+titles, but doesn't draw an extra Loyalty card.</li>
+<li><strong>If the Mutineer is executed:</strong> see §19.1.</li>
+</ul>
+<hr />
+<h2 id="16-revealed-cylons">16. Revealed Cylons</h2>
+<h3 id="161-revealing">16.1 Revealing</h3>
+<ul>
+<li>A hidden Cylon reveals <strong>only as their Action</strong>, by
+flipping a <em>You Are a Cylon</em> card and resolving its Action.</li>
+<li>From the Brig, you may reveal but don't get the Action.</li>
+</ul>
+<h3 id="162-revealing-procedure">16.2 Revealing procedure</h3>
+<ol type="1">
+<li><strong>Discard:</strong> down to <strong>3</strong> Skill cards;
+all Mutiny cards; your miracle token; any "keep in play" Quorum
+cards.</li>
+<li><strong>Titles</strong> pass by succession.</li>
+<li><strong>Resurrect:</strong> move to the <strong>Resurrection
+Ship</strong>, or Hub Destroyed if the overlay is flipped. A piloted
+viper returns to the Reserves.</li>
+<li><strong>Super Crisis:</strong> draw 1 at random. <em>Not if you were
+revealed by execution.</em></li>
+<li><strong>Extra Loyalty cards:</strong> if the fleet has traveled
+<strong>6 or less</strong>, give all your other face-down Loyalty cards
+to one human. At <strong>7+ distance</strong>, you
+<strong>can't</strong> hand them off.</li>
+<li><strong>Mutineer:</strong> if you were the Mutineer, give the
+Mutineer card face up to a human of your choice, whatever the distance.
+They draw 1 Mutiny card and give up their titles (§15.5).</li>
+<li><strong>End turn:</strong> if it's your turn, it ends immediately,
+and you don't draw a crisis.</li>
+</ol>
+<h3 id="163-a-revealed-cylons-turn">16.3 A revealed Cylon's turn</h3>
+<ul>
+<li><strong>Draw</strong> 2 Skill cards of any types, each from a
+<strong>different</strong> deck.</li>
+<li><strong>Move</strong> to any Cylon location, or use a Movement
+ability.</li>
+<li><strong>Act:</strong> use your <strong>location's action
+only</strong>. No Skill card, Quorum or character actions; your
+character sheet is ignored.</li>
+<li><strong>No Crisis step and no Activate Cylon Ships
+step.</strong></li>
+<li><strong>Prepare for Jump still happens</strong> if you resolved a
+crisis through Caprica.</li>
+<li>Discard to 10 at the end of each turn, as usual.</li>
+</ul>
+<h3 id="164-revealed-cylon-rules">16.4 Revealed Cylon rules</h3>
+<ul>
+<li>You may <strong>ignore negative effects</strong> of crises and skill
+checks, such as discards or being sent to the Brig or Sickbay, and
+crisis executions (unless the card names Cylons).</li>
+<li>You can play <strong>1</strong> Skill card into each check,
+optionally. You can't use Skill card text abilities.</li>
+<li>When you draw a crisis through <strong>Caprica</strong> and it poses
+a choice for the current player, <strong>you</strong> decide it.</li>
+<li>You can't be sent to the Brig or Sickbay, and you can't be forced to
+discard.</li>
+<li>You can't draw or play <strong>Mutiny</strong> cards.</li>
+<li>You can't gain miracle tokens.</li>
+<li>You can't be targeted by <em>Executive Order</em> or by Quorum
+cards.</li>
+<li>You can't use the Actions on any unrevealed <em>You Are a Cylon</em>
+cards you still hold, though a Cylon location such as the Resurrection
+Ship may let you give them away.</li>
+</ul>
+<hr />
+<h2 id="17-cylon-leaders">17. Cylon Leaders</h2>
+<h3 id="171-basics">17.1 Basics</h3>
+<ul>
+<li>Exactly <strong>one</strong> Cylon Leader, and one is required at 7
+players. Pegasus and Daybreak Leaders all use the <strong>Daybreak rules
+and Motive cards</strong>.</li>
+<li>Everyone knows from the start that the Leader is a Cylon, but the
+Motives decide which side they're really on.</li>
+<li>A Leader has a <strong>skill set</strong> and draws from it:
+<strong>2</strong> cards per turn (3 while Infiltrating). They draw 2 at
+setup; Athena draws 3.</li>
+<li><strong>All</strong> abilities on their sheet are always active,
+including the negative one. They may use sheet Actions <strong>instead
+of</strong> their location's action.</li>
+<li>Otherwise they're treated as a <strong>revealed Cylon</strong>,
+except while Infiltrating.</li>
+<li>They ignore effects that add a Not-a-Cylon card and draw a Loyalty
+card, and they never hold Loyalty cards.</li>
+</ul>
+<h3 id="172-motive-cards">17.2 Motive cards</h3>
+<ul>
+<li>The Leader gets <strong>2</strong> at setup and <strong>2</strong>
+more at the Sleeper phase.</li>
+<li>Each card has an <strong>allegiance</strong> (human or Cylon) and a
+<strong>condition</strong>.</li>
+<li><strong>Reveal</strong> a Motive whenever its condition is
+<strong>currently</strong> true, even mid-action, mid-check or
+mid-crisis. A condition that was true earlier doesn't count.</li>
+<li><strong>At game end</strong> the Leader may reveal any Motives whose
+conditions are true in the final game state.</li>
+<li>Revealing all 4 is possible.</li>
+<li><strong>Winning:</strong> at most <strong>1</strong> Motive left
+unrevealed <strong>and</strong> at least <strong>2</strong> revealed
+Motives matching the winning side. With 2 human and 2 Cylon Motives
+revealed, they win with either side.</li>
+<li><strong>Errata:</strong> <em>A Justified Response</em> reads "Reveal
+this card if the fleet marker is on a blue space of the Jump Preparation
+track and there are no raiders, heavy raiders or basestars on the main
+game board."</li>
+</ul>
+<h3 id="173-mutiny-and-miracles">17.3 Mutiny and miracles</h3>
+<ul>
+<li>A Leader draws and uses Mutiny cards <strong>only while
+Infiltrating</strong>, and discards them when Infiltration ends.</li>
+<li>Mutiny cards that make you "choose a player" can target an
+Infiltrating Leader.</li>
+<li>A Leader keeps their miracle token when Infiltration ends.</li>
+</ul>
+<h3 id="174-infiltrating">17.4 Infiltrating</h3>
+<ul>
+<li><strong>Start:</strong> activate the <strong>Human Fleet</strong>
+location and move to any Galactica location.</li>
+<li><strong>While Infiltrating the Leader is a human player:</strong>
+<ul>
+<li>Moves among human locations only.</li>
+<li>Draws a Crisis card at the end of each turn.</li>
+<li>Uses Skill card text.</li>
+<li>Draws <strong>3</strong> Skill cards per turn.</li>
+<li>Plays <strong>up to 2</strong> cards per check (<strong>1</strong>
+in the Brig).</li>
+</ul></li>
+<li><strong>Titles and Quorum cards:</strong> can't be President,
+Admiral or CAG, and can't receive <em>Assign Vice President</em>. May
+receive other Quorum cards, such as <em>Assign Mission Specialist</em>
+or <em>Assign Arbitrator</em>.</li>
+<li><strong>Ending it:</strong> as an Action, the Leader may return to
+the Resurrection Ship (or Hub Destroyed). <strong>From the Brig, they
+must first discard down to 3 Skill cards.</strong> Any return, including
+by execution, ends Infiltration: discard any given Quorum cards (without
+effect) and all Mutiny cards.</li>
+<li>Infiltrating doesn't change allegiance; the Motives still decide who
+the Leader wins with.</li>
+<li><strong>Boomer and Athena</strong> can both be in one game. Athena's
+presence proves Boomer is a Cylon model, <strong>not</strong> which side
+Boomer is on.</li>
+</ul>
+<hr />
+<h2 id="18-mutiny-cards-and-the-brig">18. Mutiny Cards and the Brig</h2>
+<h3 id="181-how-you-get-mutiny-cards">18.1 How you get Mutiny cards</h3>
+<ul>
+<li>From effects that tell you to draw one: crises, locations such as
+the Press Room, Quorum cards such as <em>Encourage Mutiny</em>, and
+characters such as alternate Zarek.</li>
+<li><strong>The Mutineer</strong> draws one on receiving the Mutineer
+card, and on each of their own turns in which a jump icon is resolved
+(§15.5).</li>
+<li>From <strong>choosing</strong> to discard certain
+<strong>Treachery</strong> cards (§9.5), or <em>Dradis Contact</em> or
+<em>Bait</em>. At most one Mutiny card per turn from these
+discards.</li>
+</ul>
+<h3 id="182-using-them">18.2 Using them</h3>
+<ul>
+<li>Keep them hidden.</li>
+<li>Use one as your <strong>Action</strong> during the Action step, then
+discard it face up. An empty Mutiny deck is reshuffled from its
+discards.</li>
+</ul>
+<h3 id="183-the-card-limit">18.3 The card limit</h3>
+<ul>
+<li><strong>The moment you draw a second Mutiny card, you go to the
+Brig</strong>, unless the effect says otherwise (e.g. the Press Room, or
+alternate Zarek's <em>Abuse Power</em>). There's <strong>no</strong>
+end-of-turn check.</li>
+<li>In the Brig you keep <strong>1</strong> Mutiny card. You can still
+draw and play them there; drawing a second in the Brig means discarding
+down to 1.</li>
+<li><strong>The Mutineer's limit is one higher:</strong> they go to the
+Brig on drawing a <strong>third</strong> card, and keep
+<strong>2</strong> there.</li>
+</ul>
+<h3 id="184-who-cant-use-them">18.4 Who can't use them</h3>
+<ul>
+<li><strong>Revealed Cylons</strong> never draw, play or get chosen for
+Mutiny cards.</li>
+<li>A hidden Cylon who reveals discards all of theirs.</li>
+<li>Cylon Leaders use them only while Infiltrating (§17.3).</li>
+</ul>
+<h3 id="185-errata">18.5 Errata</h3>
+<ul>
+<li><em>Peaceful Resistance</em> can be played from the Brig, even by
+the Admiral, but the player stays in the Brig.</li>
+<li><em>Unauthorized Usage</em> reads: "Action: Launch 1 nuke at a space
+area. Then remove this card from the game and discard all nuke
+tokens."</li>
+<li><em>Violent Protest</em> can be played while the President is in
+Sickbay or the Brig; if in the Brig, the President doesn't move.</li>
+</ul>
+<hr />
+<h2 id="19-execution">19. Execution</h2>
+<p>Executions come from the <strong>Airlock</strong>, some crises, some
+cards, and Final Five text.</p>
+<h3 id="191-execution-procedure">19.1 Execution procedure</h3>
+<ol type="1">
+<li><p><strong>Discard</strong> all your Skill and Mutiny cards, your
+miracle token(s), and any Quorum cards <strong>played on</strong> your
+character (e.g. <em>Assign Mission Specialist</em>). Quorum cards in the
+President's hand are unaffected.</p></li>
+<li><p><strong>Prove loyalty:</strong></p>
+<ul>
+<li>All Not-a-Cylon cards: reveal them all and go to step 3.</li>
+<li>Any <em>You Are a Cylon</em>: reveal <strong>one</strong> (don't
+take its Action), give all your other face-down Loyalty cards to a human
+of your choice, and go to step 4. If you were the Mutineer, also pass
+the Mutineer card face up to a human of your choice, as when revealing
+(§15.5).</li>
+<li>Cylon Leader: no cards to reveal; go to step 4.</li>
+</ul>
+<p>A Final Five card revealed now resolves its text and is then removed
+(§15.2).</p></li>
+<li><p><strong>Human:</strong></p>
+<ul>
+<li>A. Lose <strong>1 morale</strong>.</li>
+<li>B. Your character leaves the game permanently.</li>
+<li>C. Discard all your Loyalty cards. <strong>Keep the Mutineer
+card</strong> if you have it: your new character is the Mutineer, with
+the card face up.</li>
+<li>D. <strong>Choose a new character of any type</strong> and place
+them at their setup location. If that location is unavailable, use
+Sickbay. You don't get a miracle token.</li>
+<li>E. Add 1 card from the Not-a-Cylon pile to the Loyalty deck,
+shuffle, and <strong>draw 1</strong> Loyalty card. If the executed
+character was Boomer and the Sleeper phase hasn't happened yet, draw 1
+more.</li>
+</ul></li>
+<li><p><strong>Cylon:</strong> move to the Resurrection Ship (or Hub
+Destroyed) and follow the revealed-Cylon procedure (§16.2), but
+<strong>draw no Super Crisis</strong>.</p></li>
+<li><p><strong>End turn:</strong> if it was your turn, it ends, whatever
+you turned out to be.</p></li>
+</ol>
+<h3 id="192-other-execution-rules">19.2 Other execution rules</h3>
+<ul>
+<li><strong>Titles</strong> change hands <strong>after</strong> the new
+character is chosen, so the new character can inherit.</li>
+<li><strong>No characters left:</strong> if a human is executed and
+there's no character left to choose, the humans lose.</li>
+<li><strong>Special new characters:</strong> original Baltar, Boomer,
+Apollo, Anders and alternate Zarek have extra rules when chosen after an
+execution (§22.1).</li>
+</ul>
+<hr />
+<h2 id="20-ending-the-game">20. Ending the Game</h2>
+<p>The game ends <strong>immediately</strong> when:</p>
+<ul>
+<li><strong>A resource is at 0</strong> at the end of any turn: Cylons
+win.</li>
+<li><strong>A centurion reaches the end of the Boarding Party
+track:</strong> Cylons win.</li>
+<li><strong>6 Galactica locations are damaged at once:</strong> Cylons
+win.</li>
+<li><strong>A human is executed with no characters left:</strong> Cylons
+win.</li>
+<li><strong>The fleet jumps after reaching 10+ distance:</strong> don't
+draw a Destination. <strong>The humans win</strong>, as long as none of
+the conditions above has happened.</li>
+</ul>
+<p>Then the Cylon Leader reveals any Motives they can, and wins or loses
+with a side (§17.2).</p>
+<hr />
+<h2 id="21-miscellaneous-rules">21. Miscellaneous Rules</h2>
+<h3 id="211-resources">21.1 Resources</h3>
+<ul>
+<li><strong>Maximum 15, minimum 0.</strong> Values never go below
+0.</li>
+<li>A red resource icon means −1 of that resource.</li>
+<li>When an effect raises or lowers "the highest" or "the lowest"
+resource and there's a tie, the <strong>current player</strong>
+chooses.</li>
+<li>The red part of each dial means half or less.</li>
+</ul>
+<h3 id="212-die-rolls">21.2 Die rolls</h3>
+<p>Apply all modifiers, then cap the result to 1–8.</p>
+<h3 id="213-timing">21.3 Timing</h3>
+<p>When several players want to act at once, the <strong>current
+player</strong> decides the order. If a card can't be played as a result
+(e.g. a second <em>Strategic Planning</em>), it returns to its owner's
+hand.</p>
+<h3 id="214-component-limits">21.4 Component limits</h3>
+<ul>
+<li>Ships and tokens are limited to what's in the box. If a placement
+runs short, the current player chooses the order of placement and what
+isn't placed.</li>
+<li><strong>Empty decks</strong> reshuffle their discard piles: Skill,
+Quorum, Mutiny, Crisis, Super Crisis and Mission decks.</li>
+</ul>
+<h3 id="215-destroying-random-civilian-ships">21.5 Destroying random
+civilian ships</h3>
+<p>When told to "draw a civilian ship to destroy" (e.g. Cain's <em>Blind
+Jump</em>, the <em>Misjump</em> destination):</p>
+<ul>
+<li>Draw one from those <strong>not</strong> on the board.</li>
+<li>If all are on the board, the current player picks one there.</li>
+</ul>
+<h3 id="216-tips-for-a-7-player-table">21.6 Tips for a 7-player
+table</h3>
+<ul>
+<li>Appoint a <strong>Skill Supervisor</strong> (§9.2) and a
+<strong>Cylon Fleet tender</strong> who handles pursuit placements and
+dice.</li>
+<li>Plan the order of your turn while others play theirs.</li>
+<li>Keep this book's <strong>Quick Reference</strong> (Appendix E) at
+every seat.</li>
+</ul>
+<hr />
+<h2 id="22-clarifications-and-errata">22. Clarifications and Errata</h2>
+<h3 id="221-characters">22.1 Characters</h3>
+<ul>
+<li><p><strong>Athena (Leader):</strong> starts Infiltrating.</p>
+<ul>
+<li>If she uses <em>Resolute</em> to activate the Human Fleet while
+Infiltrating, she can't Infiltrate Galactica again.</li>
+<li>If she activates Caprica while Infiltrating, she still gets an
+Activate Cylon Ships step.</li>
+<li>If she activates Hub Destroyed while Infiltrating, she moves to the
+Cylon Fleet location and stops Infiltrating.</li>
+<li>She can't use the Hangar Deck from the Brig.</li>
+</ul></li>
+<li><p><strong>"Caprica" Six (Leader):</strong> <em>Intimate</em> reads
+"Movement: Draw 1 Skill card at random from another player's hand. Then
+that player draws 1 card from the Skill deck of your choice (it may be
+outside his Skill set)."</p></li>
+<li><p><strong>Chief Tyrol:</strong> <em>Blind Devotion</em> can be used
+on a check affected by <em>Investigative Committee</em>, even after the
+cards are face up.</p></li>
+<li><p><strong>Ellen Tigh:</strong></p>
+<ul>
+<li><em>Politically Adroit</em> and <em>Support the People</em> don't
+allow drawing outside the skill set.</li>
+<li><em>Manipulative:</em> if at the end of her turn Ellen no longer
+holds the title she took, it stays where it is. If the original holder
+can't take it back, it goes by succession, possibly to Ellen.</li>
+</ul></li>
+<li><p><strong>Felix Gaeta:</strong> <em>FTL Operator</em> and Helo's
+<em>ECO Officer</em> can both reroll the same die. The current player
+decides who goes first, and each still gets a chance.</p></li>
+<li><p><strong>Gaius Baltar (Political, original):</strong> receives 2
+Loyalty cards at setup and adds 1 to the deck.</p>
+<ul>
+<li>Chosen after an execution before the Sleeper phase: add 1
+Not-a-Cylon card to the deck, shuffle, and deal him 1 card.</li>
+<li>Chosen after the Sleeper phase: he can't use <em>Cylon
+Detector</em>.</li>
+</ul></li>
+<li><p><strong>Gaius Baltar (Support, alternate):</strong> no extra
+Loyalty card. The 3-token <em>Broadcast</em> rule is in §6.2.</p></li>
+<li><p><strong>Helena Cain:</strong></p>
+<ul>
+<li><em>Blind Jump</em> overrides <em>Assign Mission Specialist</em>,
+which stays in play for the next jump.</li>
+<li><em>Blind Jump</em> <strong>can't be used at 7+ distance</strong>,
+so use it early.</li>
+</ul></li>
+<li><p><strong>Starbuck:</strong> <em>Expert Pilot</em>: if she starts
+her turn in a viper and moves to Galactica, Pegasus or Colonial One, she
+still gets two actions.</p></li>
+<li><p><strong>Helo (Military):</strong> a reroll with <em>ECO
+Officer</em> keeps the +2 from <em>Strategic Planning</em>.</p></li>
+<li><p><strong>Helo (Pilot):</strong></p>
+<ul>
+<li>If he gets a second Mutiny card while <em>Stranded</em> (a third, if
+he is the Mutineer), he discards down to 1 (or 2) and doesn't go to the
+Brig.</li>
+<li>Chosen after an execution, he counts as Stranded on his next
+turn.</li>
+</ul></li>
+<li><p><strong>Laura Roslin:</strong> <em>Terminal Illness</em>: with
+fewer than 2 Skill cards in hand, she can't activate a
+location.</p></li>
+<li><p><strong>Apollo (Pilot):</strong></p>
+<ul>
+<li><em>Alert Viper Pilot</em> works whenever a viper is placed on the
+board, including from Command. It doesn't work from the Brig, or on a
+viper someone else is piloting.</li>
+<li><em>Headstrong</em> applies to every forced discard, including the
+hand limit and crises, but not the card paid to change ships.</li>
+<li>He may start in an assault raptor.</li>
+<li>Chosen after an execution, he launches immediately in a viper, or
+starts on the Hangar Deck if none is available.</li>
+</ul></li>
+<li><p><strong>Kat:</strong></p>
+<ul>
+<li><em>Hot Shot</em> can't be combined with <em>Strategic Planning</em>
+or other roll modifiers.</li>
+<li><em>Stim Junkie</em> reads "At the end of your Action step, if you
+are in the same location or space area you started your turn in, you are
+moved to Sickbay." It doesn't apply in the Brig.</li>
+</ul></li>
+<li><p><strong>Samuel T. Anders:</strong> chosen after an execution, he
+skips his next Receive Skills step.</p></li>
+<li><p><strong>Boomer:</strong></p>
+<ul>
+<li>Receives 2 Loyalty cards at the Sleeper phase and adds 1 to the
+deck.</li>
+<li>Chosen after an execution before the Sleeper phase: shuffle 1
+Not-a-Cylon card into the deck.</li>
+<li>Chosen after the Sleeper phase: she starts <strong>in the
+Brig</strong>, and the player draws 1 extra Loyalty card.</li>
+<li>If revealed as a Cylon before the Sleeper phase, she gets only 1
+card there.</li>
+</ul></li>
+<li><p><strong>Doc Cottle:</strong> <em>Treatment</em> reads "Action:
+Choose another human player and draw 2 Skill cards from his Skill set.
+Then give him 2 Skill cards from your hand."</p></li>
+<li><p><strong>Tom Zarek (Political):</strong> <em>Friends in Low
+Places</em> affects Brig checks.</p></li>
+<li><p><strong>Tom Zarek (Military, alternate):</strong> chosen after an
+execution, he immediately draws a Mutiny card.</p></li>
+<li><p><strong>Tory Foster:</strong> <em>Adaptable</em> triggers
+whenever a Quorum card's action is resolved, including through the
+President's Office or Roslin's <em>Skilled Politician</em>. With
+<em>Assign Mission Specialist</em> it triggers when the card is
+<strong>given</strong>, not when it's used.</p></li>
+<li><p><strong>Hoshi:</strong></p>
+<ul>
+<li><em>Reluctant</em> makes him discard a Skill card when he uses a
+Skill card's Movement ability (e.g. <em>Critical Situation</em>).</li>
+<li>With <em>Organized</em>, the three locations must differ, but each
+time he activates Command, Communications or Weapons Control he may use
+<em>Dutiful</em> to discard a card and activate it again.</li>
+</ul></li>
+<li><p><strong>Tom Zarek (alternate):</strong> the Mutiny card from
+<em>Disreputable</em> at setup is subject to <em>Necessary Step</em>:
+draw 2, keep 1, put the other on the bottom.</p></li>
+<li><p><strong>Helo and alternate Apollo:</strong> Helo may use
+<em>Moral Compass</em> after Apollo's <em>Choose a Different Path</em>,
+but Apollo can't use <em>Choose a Different Path</em> after <em>Moral
+Compass</em>.</p></li>
+<li><p><strong>Athena:</strong> <em>For Love</em> works whenever a
+player discards a Skill card, <strong>except</strong> when discarding to
+the hand limit, when resolving a Super Crisis, or when discarding to pay
+for a character-sheet ability (e.g. Kat's <em>Hot Shot</em>, Hoshi's
+<em>Dutiful</em>, Anders's <em>Star Player</em>).</p></li>
+<li><p><strong>D'Anna:</strong> using <em>Visions</em> in the Brig
+doesn't make her discard down to 3.</p></li>
+<li><p><strong>Doral:</strong> <em>Meticulous</em> can't move him to the
+Resurrection Ship, because nobody moves voluntarily into a hazardous
+location.</p></li>
+<li><p><strong>Gaius Baltar (alternate):</strong> can't reveal a <em>You
+Are a Cylon</em> card outside the Brig, except when proving loyalty
+during an execution.</p></li>
+<li><p><strong>Doc Cottle:</strong> can use Engineering cards'
+non-Action text abilities.</p></li>
+</ul>
+<h3 id="222-skill-cards">22.2 Skill cards</h3>
+<ul>
+<li><strong>Discarding "by choice":</strong> a discard counts as chosen
+unless it's <strong>random</strong> (e.g. <em>Headstrong</em>) or
+<strong>your whole hand</strong> (e.g. Tigh's <em>Alcoholic</em>).
+"Discard N" is always a choice, so discarding <em>Dradis Contact</em> or
+<em>Bait</em> that way draws a Mutiny card (once per turn).</li>
+<li><strong>Declare Emergency</strong> doesn't lower a partial pass
+number.</li>
+<li><strong>Executive Order:</strong>
+<ul>
+<li>Limit 1 per turn.</li>
+<li>A Cylon targeted by one who reveals as the first action doesn't get
+the second action.</li>
+<li>Cylons can't benefit from it.</li>
+</ul></li>
+<li><strong>Iron Will</strong> measures against the
+<strong>modified</strong> difficulty, and still costs 1 morale at total
+0 or less. It doesn't change partial passes.</li>
+<li><strong>State of Emergency</strong> isn't targeted, so a Cylon can
+use it. If the current player plays it, it resolves fully even if that
+player is revealed or executed partway.</li>
+<li><strong>Negotiations</strong> doesn't stop Cylon ships being placed
+that turn, but it does stop centurions activating.</li>
+<li><strong>Change of Plans</strong> can be used after <em>Political
+Prowess</em> or Boomer's <em>Mysterious Intuition</em> has passed a
+check.</li>
+<li><strong>Consequence</strong> results are triggered by Treachery
+cards with the Skill Check Ability icon too.</li>
+</ul>
+<h3 id="223-crises">22.3 Crises</h3>
+<ul>
+<li><em>Food Shortage:</em> the President discards 2 and the current
+player discards 3. If they're the same player, discard 5.</li>
+<li><em>Legendary Discovery</em>, on a pass: place the card next to the
+Objective. It counts as <strong>1 distance</strong>.</li>
+<li><em>Standoff with Pegasus</em>, on a pass: the current player may
+move 1 character from the Brig to any other Galactica location.</li>
+<li><em>Unwelcome Faces</em>, first option: the Admiral discards all
+Skill cards, then chooses a character to send to the Brig.</li>
+<li><em>The Farm</em>, on a fail: humans can no longer use miracle
+abilities; Cylon Leaders who aren't Infiltrating still can. Miracle
+tokens still pay for other things, such as Rebel Basestar
+locations.</li>
+</ul>
+<h3 id="224-quorum-cards">22.4 Quorum cards</h3>
+<ul>
+<li><em>Consult the Oracle</em> can't pick the Loyalty or Motive
+deck.</li>
+<li>The President chooses when to discard <em>Probation</em> to use
+it.</li>
+</ul>
+<h3 id="224a-mutiny-cards">22.4a Mutiny cards</h3>
+<ul>
+<li><em>Weapons Armed</em> reads "Action: Destroy a raptor to gain an
+assault raptor. Then launch 2 raiders from each basestar and discard
+this card."</li>
+</ul>
+<h3 id="224b-civilian-ships-and-the-cag">22.4b Civilian ships and the
+CAG</h3>
+<ul>
+<li>The CAG chooses the area only when an effect doesn't name one. If a
+card says "behind Galactica", that's where it goes. This includes the
+ships from <em>Medal of Distinction</em>.</li>
+</ul>
+<h3 id="225-loyalty-cards">22.5 Loyalty cards</h3>
+<ul>
+<li><em>Can Damage Galactica:</em> for each of the 5 tokens, the current
+player chooses Galactica or Pegasus. The revealing Cylon then picks
+which 2 to resolve.</li>
+</ul>
+<h3 id="226-destinations">22.6 Destinations</h3>
+<ul>
+<li><em>Lion's Head Nebula:</em> its +2 on the Jump Preparation track
+happens after the reset step.</li>
+</ul>
+<hr />
+<h2 id="appendix-a-playing-without-the-mutineer">Appendix A: Playing
+Without the Mutineer</h2>
+<p>A house option, <strong>not in use</strong>. Versions 1.0 and 1.1 of
+this book played this way.</p>
+<ul>
+<li><strong>Setup (§4 step 8):</strong> leave the Mutineer card in the
+box. The Loyalty deck is <strong>2 Cylon + 11 Not-a-Cylon = 13
+cards</strong>, plus the Baltar and Boomer extras as before. One card is
+still never dealt, so the odds of a Cylon card sitting out are about the
+same.</li>
+<li><strong>Ignore §15.5</strong> and every line that mentions the
+Mutineer: Sleeper phase steps 3–4, revealing step 6, the Mutineer lines
+in §18 and §19.1, and the Mutiny draw in the Prepare for Jump step.</li>
+<li>Everything else, including Mutiny cards and the second-card rule, is
+unchanged.</li>
+</ul>
+<hr />
+<h2 id="appendix-b-house-rules-in-reserve">Appendix B: House Rules in
+Reserve</h2>
+<p>These are <strong>not in use</strong>. Try them only if a problem
+shows up in play.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr class="header">
+<th>Problem</th>
+<th>House rule</th>
+<th>Trade-off</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Brig time is dragging the game</td>
+<td>Drawing a 2nd Mutiny card (3rd for the Mutineer) means
+<strong>discard down</strong> instead of going to the Brig</td>
+<td>Every card still works, but Mutiny cards lose most of their
+risk</td>
+</tr>
+<tr class="even">
+<td>The group dislikes the Mutineer</td>
+<td>Play without it (Appendix A)</td>
+<td>Loses the "known suspect" dynamic, and far fewer Mutiny cards get
+played</td>
+</tr>
+</tbody>
+</table></div>
+<p>Balance levers: none set yet. Review after the first game. Earth is
+generally thought to favour humans slightly.</p>
+<hr />
+<h2 id="appendix-c-allies-for-all-seasons-undecided">Appendix C: Allies
+for All Seasons (Undecided)</h2>
+<p>A <strong>fan variant</strong> (CR2.0 Appendix A4.5) that brings the
+Exodus Allies into non-Ionian games. <strong>Not in use; to be
+decided.</strong> The pros and cons are in the Decision Log.</p>
+<p><strong>Setup:</strong></p>
+<ul>
+<li>Put the Trauma tokens in an opaque container and <strong>remove the
+Disaster tokens</strong>.</li>
+<li>Set up Allies as in Exodus: 3 Ally cards face up; place each Ally
+token on the location printed on its card. An Ally card showing a
+character a player is using is removed and replaced.</li>
+<li><strong>Mood Pool:</strong> each player draws 4 Trauma tokens, puts
+<strong>1 face down</strong> into a shared Mood Pool (one per player)
+and keeps the rest.</li>
+</ul>
+<p><strong>Encountering an Ally:</strong></p>
+<ul>
+<li>At the end of your Movement step, if you share a location with an
+Ally token, draw <strong>one token from the Mood Pool</strong> and
+resolve that Ally's good result (Benevolent) or bad result
+(Antagonistic).</li>
+<li>Keep that token, then put any one of your tokens back into the pool
+face down, and shuffle the pool.</li>
+<li>Allies' draw and discard Trauma instructions use the container,
+never the pool.</li>
+</ul>
+<p><strong>Gaining Trauma:</strong></p>
+<ul>
+<li>Being sent to <strong>Sickbay</strong> or the <strong>Brig</strong>
+gives you 1 Trauma token from the container.</li>
+<li>A Cylon revealed <strong>by execution</strong> and sent to the
+Resurrection Ship also gains 1.</li>
+</ul>
+<p><strong>Damaged Ally locations:</strong> if an Ally's location is
+damaged and there are revealed Cylons, the revealed Cylon with the most
+Trauma secretly looks at the pool and swaps one token with one of
+theirs.</p>
+<p><strong>The reckoning at 10 distance:</strong></p>
+<ul>
+<li>Everyone reveals their Trauma. Humans and hidden Cylons score
+<strong>+1 per Benevolent</strong> and <strong>−1 per
+Antagonistic</strong>; revealed Cylons score the reverse.</li>
+</ul>
+<div class="tablewrap"><table>
+<thead>
+<tr class="header">
+<th>Score</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>−3 or less</td>
+<td>Executed (a revealed Cylon keeps their Super Crises)</td>
+</tr>
+<tr class="even">
+<td>−1 / −2</td>
+<td>Discard 2 / 4 Skill cards</td>
+</tr>
+<tr class="odd">
+<td>0</td>
+<td>Nothing</td>
+</tr>
+<tr class="even">
+<td>+1 / +2</td>
+<td>Draw 2 / 4 Skill cards (from any decks)</td>
+</tr>
+<tr class="odd">
+<td>+3 or more</td>
+<td>Move any one resource dial up or down by 1</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>Then remove all Allies and Trauma from the game.</li>
+<li><strong>Suggested house tweak if used:</strong> hold the reckoning
+at <strong>7 distance</strong> instead, so it happens mid-game and can't
+decide the ending.</li>
+</ul>
+<hr />
+<h2 id="appendix-d-whats-new-since-the-base-game">Appendix D: What's New
+Since the Base Game</h2>
+<p>Teach in this order; about 30–40 minutes for base-game veterans.</p>
+<ol type="1">
+<li><strong>Earth and Missions</strong> (§14): 10 distance; the
+Demetrius Bridge replaces that turn's crisis.</li>
+<li><strong>Cylon Fleet board</strong> (§12): Cylon ships never go away;
+the pursuit track and Auto Attack; the CAG; civilian ships stay across
+jumps; escorting.</li>
+<li><strong>New ships:</strong> Viper Mark VIIs (start damaged, move 2),
+assault raptors, nukes aimed at an area.</li>
+<li><strong>The Cylon Leader and Motives</strong> (§17): a known Cylon
+on an unknown side; Infiltration.</li>
+<li><strong>Mutiny cards and the Mutineer</strong> (§18, §15.5):
+powerful actions; a second card sends you to the Brig; Treachery
+discards cause them. One player is the publicly known Mutineer, who
+draws them most turns and may hold two.</li>
+<li><strong>Treachery and Reckless checks</strong> (§9.5–9.6): 2
+Treachery in every Destiny deck.</li>
+<li><strong>Miracle tokens</strong> (§6.2).</li>
+<li><strong>Pegasus, the Airlock and execution</strong> (§19).</li>
+<li><strong>Final Five</strong> (§15.2): looking at someone's loyalty is
+now risky.</li>
+<li><strong>New overlays:</strong> the Resurrection Ship is hazardous;
+Caprica doesn't skip the jump step.</li>
+</ol>
+<hr />
+<h2 id="appendix-e-quick-reference">Appendix E: Quick Reference</h2>
+<p><strong>Turn:</strong></p>
+<ol type="1">
+<li><strong>Skills:</strong> draw your set; 1 card in Sickbay or on the
+Resurrection Ship; 3 for an Infiltrating Leader; 2 from different decks
+for Cylons.</li>
+<li><strong>Move:</strong> 1 Skill card to change ships; no voluntary
+moves into hazardous locations.</li>
+<li><strong>Action.</strong></li>
+<li><strong>Crisis:</strong> skip if revealed Cylon, in the Brig, or
+<strong>the Bridge was used this turn</strong>.</li>
+<li><strong>Activate Cylon ships.</strong></li>
+<li><strong>Jump prep.</strong> On the Mutineer's turn, a jump icon also
+means they draw a Mutiny card.</li>
+<li><strong>Discard to 10.</strong></li>
+</ol>
+<p><strong>Skill check:</strong></p>
+<ol type="1">
+<li>Read.</li>
+<li>2 Destiny cards.</li>
+<li>Play, starting left of the current player (Brig 1, Cylon 1,
+Infiltrator 2).</li>
+<li>Shuffle and split.</li>
+<li>Skill Check Abilities, then Consequence, then Reckless.</li>
+<li>Total.</li>
+<li>Result.</li>
+</ol>
+<p><strong>Jump:</strong></p>
+<ol type="1">
+<li>Vipers home (assault raptors may stay; civilians stay).</li>
+<li>Cylon ships to the Cylon Fleet board; clear basestar damage.</li>
+<li>Clear the Active Mission.</li>
+<li>Admiral draws 2 Destinations, keeps 1, bottoms 1.</li>
+<li>Resolve it.</li>
+<li>Objective check: 4 = Sleeper; 10 = the next jump wins.</li>
+<li>Reset the jump track.</li>
+</ol>
+<p><strong>Losing conditions:</strong></p>
+<ul>
+<li>A resource at 0 at the end of a turn.</li>
+<li>A centurion at the end of the track.</li>
+<li>6 Galactica locations damaged at once.</li>
+<li>No characters left after an execution.</li>
+</ul>
+<p><strong>Loyalty deck (7 players):</strong> 2 Cylon + 11 Not-a-Cylon +
+the Mutineer = 14 (+1 original Baltar, +1 Boomer).</p>
+<p><strong>Mutineer:</strong> revealed at once; draws another Loyalty
+card and 1 Mutiny card; gives up titles; draws a Mutiny card on each of
+their turns with a jump icon; Brig on the 3rd Mutiny card.</p>
+<p><strong>Brig:</strong></p>
+<ul>
+<li>Skip crises; play 1 card per check.</li>
+<li>Escape check: 7, Politics + Tactics.</li>
+<li>Out also via <em>Presidential Pardon</em>, <em>Make a Deal</em>,
+<em>Dishonest Tactics</em> or <em>Rebuild Trust</em>.</li>
+<li>The Admiral and CAG lose their titles; the President keeps
+hers.</li>
+</ul>
+<hr />
+<p><em>Sources: the official Battlestar Galactica, Pegasus, Exodus and
+Daybreak rulebooks; the official Errata and FAQ (updated 2 September
+2014), checked item by item; and the Unofficial Combined Rulebook v2.0
+with its Appendix (M. Elfström and K. Vanhoyland, 2025). Location, title
+card and most mission text is printed on the components themselves and
+isn't reproduced here.</em></p>
+
+<a class="back" href="index.html">&larr; Back to the primer</a>
+</main>
+<footer>
+  <div class="wrap">
+    <p>An unofficial fan resource for a home game. Battlestar Galactica: The Board Game is published by Fantasy Flight Games and is based on the series owned by its rights holders. When this page and a card disagree, the card wins.</p>
+  </div>
+</footer>
+</body>
+</html>
