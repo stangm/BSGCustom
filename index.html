@@ -192,6 +192,10 @@
   table.setup th { width: 34%; font-weight: 600; }
   table.setup td small { display: block; color: var(--muted); margin-top: 2px; font-size: 14.5px; }
 
+  .key { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: center; font-size: 15px; color: var(--muted); margin: 0 0 18px; }
+  .key .swatch { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+  .key .swatch i { display: inline-block; width: 5px; height: 18px; border-radius: 2px; }
+
   dl.glossary { margin: 16px 0 0; }
   dl.glossary dt { font-weight: 700; margin-top: 14px; }
   dl.glossary dd { margin: 2px 0 0; color: var(--muted); }
@@ -274,6 +278,13 @@
 <section id="table">
   <h2>How we are setting up</h2>
   <p class="sub">Tags show what is in play at our table.</p>
+  <p class="key" aria-label="Colour key for the boxes further down">
+    <span>In the sections below, the stripe on each box shows who it mostly concerns:</span>
+    <span class="swatch"><i style="background:var(--human)"></i>the human side</span>
+    <span class="swatch"><i style="background:var(--cylon)"></i>Cylons and hidden loyalty</span>
+    <span class="swatch"><i style="background:var(--accent)"></i>everyone</span>
+    <span class="swatch"><i style="background:var(--line)"></i>not in play</span>
+  </p>
 
   <table class="setup">
     <tr>
@@ -568,6 +579,7 @@
     <li><a href="rulebook.html">Our house rulebook</a>: every rule for the setup described on this page, in one place.</li>
     <li><a href="player-aid.pdf">Two-page player aid (PDF)</a>: a turn-by-turn reference to print and keep at your seat. Also available as a <a href="player-aid.docx">Word file</a>.</li>
     <li><a href="https://jbiatek.github.io/BSGRulebook/rulebook.html">Dynamic BSG rulebook</a>: a fan-made combined rulebook that changes to match the expansions you choose.</li>
+    <li><a href="https://images-cdn.fantasyflightgames.com/ffg_content/Battlestar_Galactica/bsg-rulebook-web.pdf">Base game rulebook (PDF)</a></li>
     <li><a href="https://images-cdn.fantasyflightgames.com/ffg_content/Battlestar_Galactica/BSG-Pegasus-rulebook-web.pdf">Pegasus rulebook (PDF)</a></li>
     <li><a href="https://images-cdn.fantasyflightgames.com/filer_public/06/66/0666fbcc-e40f-423c-b102-0ba2164d2455/bsg-exodus-rules.pdf">Exodus rulebook (PDF)</a></li>
     <li><a href="https://images-cdn.fantasyflightgames.com/filer_public/11/e5/11e5b88b-a6f7-4819-b467-e729d6486b90/bsg_daybreak_rulebook_engindd_v-3.pdf">Daybreak rulebook (PDF)</a></li>
